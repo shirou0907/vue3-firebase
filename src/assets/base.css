@@ -7,3 +7,13 @@
   font-weight: normal;
 }
 
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+:root {
+  --blue: #1e90ff;
+  --white: #ffffff;
+  --main-color: #fcda9a;
+}
+

@@ -7,31 +7,43 @@ import {
   createUserWithEmailAndPassword,
   signOut,
   sendEmailVerification,
+  FacebookAuthProvider,
 } from "@firebase/auth";
 import { auth } from "@/firebase/config.js";
+import { createOrUpdate } from "@/repository/firestore/index.js";
 
 const moduleAuth = {
+  namespace: true,
   state: () => ({
     user: null,
-    isLoggin: false,
+    isLogin: null,
   }),
   mutations: {
     setUser(state, user) {
       state.user = user;
-      console.log(user);
+      // console.log(user);
     },
     setLogin(state, payload) {
-      state.isLoggin = payload;
+      state.isLogin = payload;
     },
   },
+  getters: {
+    getUser(state) {
+      return state.user;
+    },
+    getStatus(state) {
+      return state.isLogin;
+    }
+  },
   actions: {
-    async checkUser({ commit, dispatch }) {
+    async checkUser({ commit }) {
       onAuthStateChanged(auth, (user) => {
         if (user) {
+          commit("setLogin", true);
           commit("setUser", user);
-          dispatch("success", "User logged in");
+          createOrUpdate("users", { active: true }, user.uid);
         } else {
-          dispatch("error", "User not logged in");
+          commit("setLogin", false);
         }
       });
     },
@@ -57,6 +69,7 @@ const moduleAuth = {
         const user = await signInWithEmailAndPassword(auth, email, password);
         if (user) {
           console.log(user);
+          await createOrUpdate("users", { active: true }, user.uid);
           commit("setLogin", true);
           dispatch("success", "Login Success!");
         }
@@ -73,6 +86,20 @@ const moduleAuth = {
         const token = credential.accessToken;
         console.log(token);
         // The signed-in user info.
+        commit("setLogin", true);
+        dispatch("success", "Login Success!");
+      } catch (error) {
+        dispatch("error", error.message);
+      }
+    },
+
+    async loginWithFaceBook({ commit, dispatch }) {
+      try {
+        const provider = new FacebookAuthProvider();
+        const result = await signInWithPopup(auth, provider);
+        const credential = FacebookAuthProvider.credentialFromResult(result);
+        const accessToken = credential.accessToken;
+        console.log(accessToken);
         commit("setLogin", true);
         dispatch("success", "Login Success!");
       } catch (error) {

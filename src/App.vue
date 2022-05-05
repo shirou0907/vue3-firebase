@@ -1,21 +1,16 @@
 <script setup>
-import { useStore } from "vuex";
-
-const store = useStore();
-store.dispatch("checkUser");
+import BaseHeader from "@/components/header/BaseHeader.vue";
+import MainHeader from "@/components/header/MainHeader.vue";
+import { checkPosition } from "@/composable/checkScroll.js";
+const { position } = checkPosition();
 </script>
 
 <template>
   <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
-
-    <div class="wrapper"></div>
+    <BaseHeader v-if="position < 200"></BaseHeader>
+    <transition name="scroll">
+      <MainHeader v-if="position >= 200" />
+    </transition>
   </header>
 
   <router-view></router-view>
@@ -23,4 +18,20 @@ store.dispatch("checkUser");
 
 <style>
 @import "@/assets/base.css";
+@import url("https://fonts.googleapis.com/css2?family=Montez&family=Roboto:wght@100&family=Suranna&display=swap");
+.scroll-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.scroll-leave-active {
+  transition: all 0.5s ease-out;
+}
+
+.scroll-enter-from {
+  transform: translateY(-20px);
+}
+.scroll-leave-to {
+  opacity: 0;
+  transform: translateY(-100px);
+}
 </style>

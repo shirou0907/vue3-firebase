@@ -9,7 +9,8 @@
       <input type="password" name="password" v-model="password" />
     </div>
     <button @click="loginWithEmail()">Login</button>
-    <button @click="loginWithGoogle()">Login width Google</button>
+    <button @click="loginWithGoogle()">Login with Google</button>
+    <button @click="loginWithFacebook()">Login with Facebook</button>
     <button @click="logout()">Logout</button>
   </div>
 </template>
@@ -34,6 +35,12 @@ const loginWithEmail = async () => {
 const loginWithGoogle = async () => {
   isLoading.value = true;
   await store.dispatch("loginWithGoogle");
+  isLoading.value = false;
+};
+
+const loginWithFacebook = async () => {
+  isLoading.value = true;
+  await store.dispatch("loginWithFaceBook");
   isLoading.value = false;
 };
 
