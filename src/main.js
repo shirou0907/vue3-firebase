@@ -3,6 +3,10 @@ import App from "./App.vue";
 
 const app = createApp(App);
 
+import VueAwesomeSwiper from "vue-awesome-swiper";
+import "swiper/css";
+app.use(VueAwesomeSwiper /* { default options with global component } */);
+
 //VueX
 import { createStore } from "vuex";
 import store from "@/store/index.js";

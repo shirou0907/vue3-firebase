@@ -7,9 +7,9 @@ const { position } = checkPosition();
 
 <template>
   <header>
-    <BaseHeader v-if="position < 200"></BaseHeader>
+    <BaseHeader v-if="position < 160"></BaseHeader>
     <transition name="scroll">
-      <MainHeader v-if="position >= 200" />
+      <MainHeader v-if="position >= 160" />
     </transition>
   </header>
 

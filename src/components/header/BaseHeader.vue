@@ -6,8 +6,8 @@
           alt="Vue logo"
           class="logo"
           src="@/assets/logo.svg"
-          width="40"
-          height="40"
+          width="80"
+          height="80"
         />
       </div>
       <div class="header-link">
@@ -18,13 +18,13 @@
           >HOME</router-link
         >
         <router-link
-          to="/meal"
+          to="/"
           class="header-link-item"
           active-class="header-link-active"
           >ABOUT</router-link
         >
         <router-link
-          to="/ac"
+          to="/"
           class="header-link-item"
           active-class="header-link-active"
           >MENU</router-link

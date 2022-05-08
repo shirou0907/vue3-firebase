@@ -1,4 +1,6 @@
 <script setup>
+import HomeStory from "../components/home/HomeStory.vue";
+import HomeReview from "../components/home/HomeReview.vue";
 // import { getData, updateData } from "@/repository/firestore";
 // getData("products").then((a) => console.log(a));
 // updateData("users", { like: [""] }, "adsasdad");
@@ -25,7 +27,9 @@
         />
       </div>
     </div>
-    <div class="home-layer"></div>
+
+    <HomeStory />
+    <HomeReview />
   </div>
 </template>
 
@@ -38,9 +42,10 @@
 .home-intro {
   position: absolute;
   top: 50%;
-  transform: translateY(-50%) translateX(-50%);
+  transform: translateY(-64%) translateX(-50%);
   left: 50%;
   text-align: center;
+  z-index: 1;
 }
 
 .home-intro-p {
@@ -63,18 +68,22 @@
   content: "";
   position: absolute;
   top: 50%;
-  left: -4px;
+  height: 10px;
+  left: 14px;
   transform: translateY(-50%);
-  border-top: 2px solid #ccc;
+  border-top: 1px solid #fcda9a;
+  border-bottom: 2px solid #fcda9a;
   width: 120px;
 }
 .home-intro-cook::before {
   content: "";
   position: absolute;
   top: 50%;
-  right: -4px;
+  right: 14px;
+  height: 10px;
   transform: translateY(-50%);
-  border-top: 2px solid #ccc;
+  border-top: 1px solid #fcda9a;
+  border-bottom: 2px solid #fcda9a;
   width: 120px;
 }
 .home-img {

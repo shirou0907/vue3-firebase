@@ -18,13 +18,13 @@
           >HOME</router-link
         >
         <router-link
-          to="/meal"
+          to="/"
           class="header-link-item"
           active-class="header-link-active"
           >ABOUT</router-link
         >
         <router-link
-          to="/ac"
+          to="/"
           class="header-link-item"
           active-class="header-link-active"
           >MENU</router-link
