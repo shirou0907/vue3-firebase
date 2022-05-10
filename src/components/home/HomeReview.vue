@@ -22,7 +22,17 @@ const rating = ref([
   {
     name: "Anh Tuan",
     message:
+      "Best customer support and response time I have ever seen... not to mention a kick ass theme! Great feeling from this pourchase Thank you Pixel Industry!",
+  },
+  {
+    name: "Truong Son",
+    message:
       "Really enjoyed our stay at Royal Plate. Delicious food, friendly staff and exquisite atmosphere. Recommend it!",
+  },
+  {
+    name: "Manh Dung",
+    message:
+      "Best customer support and response time I have ever seen... not to mention a kick ass theme! Great feeling from this pourchase Thank you Pixel Industry!",
   },
 ]);
 </script>

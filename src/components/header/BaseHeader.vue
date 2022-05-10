@@ -83,7 +83,7 @@ const user = computed(() => store.getters.getUser);
 }
 
 .wrap-header {
-  padding: 0 40px;
+  padding: 0 100px;
   position: fixed;
   top: 0;
   left: 0;
@@ -112,6 +112,7 @@ const user = computed(() => store.getters.getUser);
   margin: 0 10px;
   text-decoration: none;
   color: #fff;
+  font-size: 24px;
 }
 
 .header-link-active {

@@ -5,10 +5,10 @@
   </div>
 </template>
 <script setup>
-import { defineProps } from "vue";
+// import { defineProps } from "vue";
 
-const img = defineProps(["img"]);
-img ? console.log(img) : console.log("no img");
+// const img = defineProps(["img"]);
+// img ? console.log(img) : console.log("no img");
 // const logo = ref("");
 // watchEffect(async () => {
 //   logo.value = (

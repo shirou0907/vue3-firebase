@@ -3,6 +3,15 @@ import App from "./App.vue";
 
 const app = createApp(App);
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { far } from "@fortawesome/free-regular-svg-icons";
+library.add(fas, far, fab);
+
+import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+app.component("font-awesome-icon", FontAwesomeIcon);
+
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/css";
 app.use(VueAwesomeSwiper /* { default options with global component } */);
@@ -20,9 +29,6 @@ import router from "./router";
 app.use(router);
 
 import BootstrapVue3 from "bootstrap-vue-3";
-// Optional, since every component import their Bootstrap functionality
-// the following line is not necessary
-// import 'bootstrap'
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue-3/dist/bootstrap-vue-3.css";
 app.use(BootstrapVue3);

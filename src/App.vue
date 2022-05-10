@@ -1,37 +1,49 @@
 <script setup>
 import BaseHeader from "@/components/header/BaseHeader.vue";
 import MainHeader from "@/components/header/MainHeader.vue";
+import BaseFooter from "@/components/footer/BaseFooter.vue";
 import { checkPosition } from "@/composable/checkScroll.js";
 const { position } = checkPosition();
+
+const scrollTop = () => {
+  window.scrollTo(0, 0);
+};
 </script>
 
 <template>
   <header>
-    <BaseHeader v-if="position < 160"></BaseHeader>
+    <base-header v-if="position < 160"></base-header>
     <transition name="scroll">
-      <MainHeader v-if="position >= 160" />
+      <main-header v-if="position >= 160" />
+    </transition>
+
+    <transition name="fade">
+      <div v-if="position > 1000" class="button-home" @click="scrollTop()">
+        <font-awesome-icon :icon="['fas', 'angles-up']" class="fa-fade" />
+      </div>
     </transition>
   </header>
 
   <router-view></router-view>
+
+  <footer>
+    <base-footer />
+  </footer>
 </template>
 
-<style>
+<style lang="scss">
 @import "@/assets/base.css";
 @import url("https://fonts.googleapis.com/css2?family=Montez&family=Roboto:wght@100&family=Suranna&display=swap");
-.scroll-enter-active {
-  transition: all 0.1s ease-out;
-}
 
-.scroll-leave-active {
-  transition: all 0.5s ease-out;
-}
-
-.scroll-enter-from {
-  transform: translateY(-20px);
-}
-.scroll-leave-to {
-  opacity: 0;
-  transform: translateY(-100px);
+.button-home {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 12px 20px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 1px 8px #000;
+  cursor: pointer;
+  z-index: 10;
 }
 </style>

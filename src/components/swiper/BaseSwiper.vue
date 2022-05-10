@@ -14,21 +14,30 @@
   </swiper>
 </template>
 
-<script setup>
+<script>
 import { Pagination, Autoplay } from "Swiper";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-import { defineProps } from "vue";
-const modules = [Pagination, Autoplay];
-defineProps({
-  swiper: {
-    type: Object,
+
+export default {
+  components: {
+    Swiper,
+    SwiperSlide,
   },
-});
+  props: ["swiper"],
+  setup() {
+    return {
+      modules: [Pagination, Autoplay],
+    };
+  },
+};
 </script>
 
 <style scoped>
+.review-body {
+  cursor: grabbing;
+}
 .review-description {
   font-size: 14px;
   font-style: italic;

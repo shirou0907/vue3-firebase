@@ -1,6 +1,8 @@
 <script setup>
 import HomeStory from "../components/home/HomeStory.vue";
 import HomeReview from "../components/home/HomeReview.vue";
+import HomeCatering from "../components/home/HomeCatering.vue";
+import HomeContact from "../components/home/HomeContact.vue";
 // import { getData, updateData } from "@/repository/firestore";
 // getData("products").then((a) => console.log(a));
 // updateData("users", { like: [""] }, "adsasdad");
@@ -29,7 +31,9 @@ import HomeReview from "../components/home/HomeReview.vue";
     </div>
 
     <HomeStory />
+    <HomeCatering />
     <HomeReview />
+    <HomeContact />
   </div>
 </template>
 

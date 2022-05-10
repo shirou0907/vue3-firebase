@@ -5,6 +5,7 @@
   margin: 0;
   position: relative;
   font-weight: normal;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -17,3 +18,28 @@ body {
   --main-color: #fcda9a;
 }
 
+.scroll-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.scroll-leave-active {
+  transition: all 0.5s ease-out;
+}
+
+.scroll-enter-from {
+  transform: translateY(-20px);
+}
+.scroll-leave-to {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 1.5s ease-in;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
