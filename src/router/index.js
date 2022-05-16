@@ -12,27 +12,39 @@ const router = createRouter({
     {
       path: "/about",
       name: "about",
-      children: [
-        {
-          name: "about-us",
-          path: "us",
-          component: () => import("../views/AboutUsView.vue"),
-        },
-        {
-          name: "about-us2",
-          path: "us2",
-          component: () => import("../views/AboutUsView2.vue"),
-        },
-      ],
+      // children: [
+      //   {
+      //     name: "about-us",
+      //     path: "us",
+      //     component: () => import("../views/AboutUsView.vue"),
+      //   },
+      //   {
+      //     name: "about-us2",
+      //     path: "us2",
+      //     component: () => import("../views/AboutUsView2.vue"),
+      //   },
+      // ],
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/AboutView.vue"),
     },
     {
+      path: "/menu",
+      name: "menu",
+      component: () => import("../views/MenuView.vue"),
+      children: [
+        {
+          path: ":id",
+          name: "menu-category",
+          component: () => import("../views/CategoryView.vue"),
+        },
+      ],
+    },
+    {
       path: "/meal/:id",
       name: "meal",
-      component: () => import("../views/ProductView.vue"),
+      component: () => import("../views/MealView.vue"),
     },
     {
       path: "/login",

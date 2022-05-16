@@ -24,7 +24,7 @@
           >ABOUT</router-link
         >
         <router-link
-          to="/"
+          to="/menu"
           class="header-link-item"
           active-class="header-link-active"
           >MENU</router-link
@@ -36,7 +36,7 @@
           >CONTACT</router-link
         >
         <router-link
-          :to="{ name: 'meal', params: { id: 1 } }"
+          :to="{ name: 'menu' }"
           class="header-link-item"
           active-class="header-link-active"
           >BLOG</router-link

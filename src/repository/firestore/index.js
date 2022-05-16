@@ -2,6 +2,7 @@ import {
   collection,
   doc,
   getDocs,
+  getDoc,
   addDoc,
   setDoc,
   updateDoc,
@@ -9,6 +10,7 @@ import {
   arrayRemove,
 } from "@firebase/firestore";
 import { db } from "@/firebase/config.js";
+import { data } from "dom7";
 
 export async function getData(document) {
   const querySnapshot = await getDocs(collection(db, document));
@@ -16,6 +18,19 @@ export async function getData(document) {
     return { ...doc.data(), id: doc.id };
   });
   return data;
+}
+
+export async function getOneDoc(collection, id) {
+  const docRef = doc(db, collection, id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    const result = docSnap.data();
+    return { result };
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
 }
 
 export async function addNewDoc(document, data) {
