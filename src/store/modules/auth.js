@@ -10,7 +10,7 @@ import {
   FacebookAuthProvider,
 } from "@firebase/auth";
 import { auth } from "@/firebase/config.js";
-import { createOrUpdate } from "@/repository/firestore/index.js";
+import { createOrUpdate, updateData } from "@/repository/firestore/index.js";
 
 const moduleAuth = {
   namespace: true,
@@ -33,7 +33,7 @@ const moduleAuth = {
     },
     getStatus(state) {
       return state.isLogin;
-    }
+    },
   },
   actions: {
     async checkUser({ commit }) {
@@ -42,6 +42,11 @@ const moduleAuth = {
           commit("setLogin", true);
           commit("setUser", user);
           createOrUpdate("users", { active: true }, user.uid);
+          updateData(
+            "users",
+            { name: user.displayName, photo: user.photoURL },
+            user.uid
+          );
         } else {
           commit("setLogin", false);
         }

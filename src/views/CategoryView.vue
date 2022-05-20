@@ -11,12 +11,16 @@
         v-for="(item, index) in list"
         :key="index"
       >
-        <img
-          :src="item.strMealThumb"
-          :load="(imgLoad = true)"
-          :class="[{ test: imgLoad }, '']"
-        />
-        <p v-if="imgLoad">Loading</p>
+        <div class="wrap-image">
+          <transition name="fade">
+            <img
+              :src="item.strMealThumb"
+              @load="imgLoaded = true"
+              :class="[imgLoaded ? 'loading-image' : '']"
+              v-show="imgLoaded"
+            />
+          </transition>
+        </div>
         <div class="item-title">
           <p>{{ item.strMeal }}</p>
         </div>
@@ -31,7 +35,7 @@ import { useRoute } from "vue-router";
 import axios from "axios";
 const id = ref("beef");
 const list = ref([]);
-const imgLoad = ref("false");
+const imgLoaded = ref("false");
 
 const isLoading = ref(false);
 const getList = async () => {
@@ -56,6 +60,18 @@ watch(route, (newRoute) => {
 console.log(id);
 </script>
 <style scoped>
+.fade-enter-active {
+  transition: opacity 3s ease-in-out;
+}
+
+.fade-enter-to {
+  opacity: 1;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+
 .menu-item img {
   width: 100%;
   object-fit: cover;
@@ -70,17 +86,9 @@ console.log(id);
   overflow: hidden;
 }
 
-@keyframes uppper {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.test {
-  background-color: red;
-  height: 120px;
+.loading-image {
+  height: 136px;
+  background: transparent url("@/assets/img/loading-image.gif") center / cover
+    no-repeat;
 }
 </style>

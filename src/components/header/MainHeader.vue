@@ -10,6 +10,14 @@
           height="40"
         />
       </div>
+      <div class="header-search">
+        <div class="header-link-item" @click="openSearch = !openSearch">
+          <font-awesome-icon
+            class="icon-link"
+            :icon="['fas', 'magnifying-glass']"
+          />
+        </div>
+      </div>
       <div class="header-link">
         <router-link
           to="/"
@@ -56,12 +64,20 @@
         </div>
       </div>
     </div>
+    <transition name="tab">
+      <search-meal @close-tab="closeSearch()" v-if="openSearch"></search-meal>
+    </transition>
   </div>
 </template>
 <script setup>
+import SearchMeal from "@/components/sidebar/SearchMeal.vue";
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, ref } from "vue";
 const store = useStore();
+const openSearch = ref(false);
+const closeSearch = () => {
+  openSearch.value = false;
+};
 const status = computed(() => store.getters.getStatus);
 const user = computed(() => store.getters.getUser);
 </script>
@@ -80,6 +96,20 @@ const user = computed(() => store.getters.getUser);
 }
 .slide-fade-leave-to {
   opacity: 0;
+}
+
+.tab-enter-active {
+  transition: all 0.3s ease-out;
+}
+
+.tab-leave-active {
+  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.tab-enter-from,
+.tab-leave-to {
+  opacity: 0;
+  transform: translateX(-50%);
 }
 
 .wrap-header {

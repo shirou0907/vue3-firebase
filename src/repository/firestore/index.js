@@ -8,9 +8,9 @@ import {
   updateDoc,
   arrayUnion,
   arrayRemove,
+  serverTimestamp,
 } from "@firebase/firestore";
 import { db } from "@/firebase/config.js";
-import { data } from "dom7";
 
 export async function getData(document) {
   const querySnapshot = await getDocs(collection(db, document));

@@ -50,6 +50,9 @@ const getListCategory = async () => {
 
 .wrap-fragment {
   height: 100vh;
-  overflow-y: scroll;
+  direction: rtl;
+  overflow-y: auto;
 }
+
+
 </style>
