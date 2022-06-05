@@ -24,11 +24,18 @@ const moduleMessage = {
     error({ commit }, message) {
       commit("error", message);
     },
-    clear({ commit }, message) {
-      commit("success", message);
+    clear({ commit }) {
+      commit("clear");
     },
   },
-  getters: {},
+  getters: {
+    getMessage(state) {
+      return state.message;
+    },
+    getType(state) {
+      return state.type;
+    },
+  },
 };
 
 export default moduleMessage;

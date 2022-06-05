@@ -9,15 +9,16 @@
           width="40"
           height="40"
         />
-      </div>
-      <div class="header-search">
-        <div class="header-link-item" @click="openSearch = !openSearch">
-          <font-awesome-icon
-            class="icon-link"
-            :icon="['fas', 'magnifying-glass']"
-          />
+        <div class="header-search">
+          <div class="header-link-item" @click="openSearch = !openSearch">
+            <font-awesome-icon
+              class="icon-link"
+              :icon="['fas', 'magnifying-glass']"
+            />
+          </div>
         </div>
       </div>
+
       <div class="header-link">
         <router-link
           to="/"
@@ -50,7 +51,7 @@
           >BLOG</router-link
         >
       </div>
-      <div class="header-user">
+      <div class="header-user" @click="store.dispatch('logout')">
         <transition name="slide-fade">
           <div v-if="status" class="header-auth">
             <div class="header-user-img">
@@ -99,17 +100,17 @@ const user = computed(() => store.getters.getUser);
 }
 
 .tab-enter-active {
-  transition: all 0.3s ease-out;
+  transition: all 0.8s linear;
 }
 
 .tab-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.6s ease-out;
 }
 
 .tab-enter-from,
 .tab-leave-to {
   opacity: 0;
-  transform: translateX(-50%);
+  transform: translateX(-200%);
 }
 
 .wrap-header {

@@ -7,8 +7,6 @@ import {
   setDoc,
   updateDoc,
   arrayUnion,
-  arrayRemove,
-  serverTimestamp,
 } from "@firebase/firestore";
 import { db } from "@/firebase/config.js";
 
@@ -71,11 +69,11 @@ export function updateArray() {
     }
   };
 
-  const updateLike = async (document, data, id) => {
+  const like = async (document, data, id) => {
     try {
       const ref = doc(db, document, id);
       await updateDoc(ref, {
-        like: arrayUnion(data),
+        [`likes.${data}`]: true,
       });
     } catch (error) {
       console.log(error);
@@ -86,12 +84,12 @@ export function updateArray() {
     try {
       const ref = doc(db, document, id);
       await updateDoc(ref, {
-        like: arrayRemove(data),
+        [`likes.${data}`]: false,
       });
     } catch (error) {
       console.log(error);
     }
   };
 
-  return { updateComment, updateLike, unLike };
+  return { updateComment, like, unLike };
 }

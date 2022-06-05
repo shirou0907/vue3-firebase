@@ -1,27 +1,30 @@
 <template>
   <div class="wrap-search">
-    <input
-      type="text"
-      name="name"
-      id="name"
-      v-model.trim="key"
-      @keyup="searchMeal(), (currentLoad = 6)"
-    />
-    <transition name="fade">
-      <div v-if="!isLoading">
-        <div v-for="(meal, index) in lists" :key="index">
-          <router-link
-            :to="{ name: 'meal', params: { id: meal.idMeal } }"
-            @click="$emit('closeTab')"
-            >{{ meal.strMeal }}</router-link
-          >
+    <div class="search-view">
+      <input
+        type="text"
+        name="name"
+        id="name"
+        v-model.trim="key"
+        @keyup="searchMeal(), (currentLoad = 6)"
+      />
+      <transition name="fade">
+        <div v-if="!isLoading">
+          <div v-for="(meal, index) in lists" :key="index">
+            <router-link
+              :to="{ name: 'meal', params: { id: meal.idMeal } }"
+              @click="$emit('closeTab')"
+              >{{ meal.strMeal }}</router-link
+            >
+          </div>
         </div>
-      </div>
-    </transition>
-    {{ message }}
-    <button @click="currentLoad += 6" v-if="currentLoad < meals.length">
-      Load
-    </button>
+      </transition>
+      {{ message }}
+      <button @click="currentLoad += 6" v-if="currentLoad < meals.length">
+        Load
+      </button>
+    </div>
+    <div class="wrap-modal" @click="$emit('closeTab')"></div>
   </div>
 </template>
 <script setup>
@@ -49,12 +52,13 @@ const searchMeal = async () => {
 };
 </script>
 <style>
-.wrap-search {
+.search-view {
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   width: 40%;
+  height: 100vh;
   background-color: #ccc;
   z-index: 100000;
   padding: 60px;
@@ -72,5 +76,14 @@ const searchMeal = async () => {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.wrap-modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgb(0, 0, 0, 0.3);
 }
 </style>

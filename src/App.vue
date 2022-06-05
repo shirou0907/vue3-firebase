@@ -3,8 +3,9 @@ import BaseHeader from "@/components/header/BaseHeader.vue";
 import MainHeader from "@/components/header/MainHeader.vue";
 import BaseFooter from "@/components/footer/BaseFooter.vue";
 import { checkPosition } from "@/composable/checkScroll.js";
+import { useRoute } from "vue-router";
+const route = useRoute();
 const { position } = checkPosition();
-
 const scrollTop = () => {
   window.scrollTo(0, 0);
 };
@@ -12,9 +13,9 @@ const scrollTop = () => {
 
 <template>
   <header>
-    <base-header v-if="position < 160"></base-header>
+    <base-header v-if="route.meta.isShow && position < 160"></base-header>
     <transition name="scroll">
-      <main-header v-if="position >= 160" />
+      <main-header v-if="route.meta.isShow && position >= 160" />
     </transition>
 
     <transition name="fade">
@@ -27,7 +28,7 @@ const scrollTop = () => {
   <router-view></router-view>
 
   <footer>
-    <base-footer />
+    <base-footer v-if="route.meta.isShow" />
   </footer>
 </template>
 

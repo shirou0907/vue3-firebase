@@ -41,6 +41,7 @@ const moduleAuth = {
         if (user) {
           commit("setLogin", true);
           commit("setUser", user);
+          localStorage.setItem("user", JSON.stringify(user));
           createOrUpdate("users", { active: true }, user.uid);
           updateData(
             "users",
@@ -61,7 +62,11 @@ const moduleAuth = {
           password
         );
         if (user) {
-          await updateProfile(auth.currentUser, { displayName: name });
+          await updateProfile(auth.currentUser, {
+            displayName: name,
+            photoURL:
+              "https://img.icons8.com/wired/64/undefined/walter-white.png",
+          });
           dispatch("success", "User created!");
         }
       } catch (error) {

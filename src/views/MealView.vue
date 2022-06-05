@@ -1,10 +1,10 @@
 <template>
-  <base-fragment>
+  <base-fragment v-if="user">
+    {{ status }}
     <div>{{ meal.idMeal }}</div>
     <div>{{ meal.strMeal }}</div>
     <p>{{ meal.strInstructions }}</p>
     <img :src="meal.strMealThumb" alt="" />
-
     <div class="wrap-spice row">
       <div
         v-for="(spice, index) in meal.spice"
@@ -19,8 +19,8 @@
         {{ spice.mesure }}
       </div>
     </div>
-    <button @click="like()">Like</button>
-    <button @click="unlike()">Unlike</button>
+    <button @click="like()" v-if="!status">Like</button>
+    <button @click="unlike()" v-if="status">Unlike</button>
 
     <div class="form-comment">
       comment
@@ -36,7 +36,7 @@
     </div>
 
     <div class="meal-review">
-      <p v-if="isLoading">Loading...</p>
+      <p v-if="isLoadingComment">Loading...</p>
       <div class="row" v-for="(data, index) in review" :key="index">
         <div v-if="data.name" class="col col-md-6">
           {{ data.message }}
@@ -60,18 +60,18 @@ import {
   updateArray,
 } from "../repository/firestore";
 // import { serverTimestamp } from "firebase/firestore";
-const meal = ref("");
-const review = ref([]);
-const isLoading = ref(false);
-const comment = ref({ message: null, rate: null, uid: null, updateAt: null });
 const route = useRoute();
 const store = useStore();
 watch(route, (newRoute) => {
   getMeal(newRoute.params.id);
 });
-const user = computed(() => store.getters.getUser);
-console.log(user);
 
+//Get info User Logged in
+const user = computed(() => store.getters.getUser);
+console.log(user.value);
+
+//Get Meal By Id
+const meal = ref("");
 const getMeal = async (id) => {
   await createOrUpdate("products", { active: true }, route.params.id);
   const res = await axios.get(
@@ -90,27 +90,39 @@ const getMeal = async (id) => {
 };
 getMeal(route.params.id);
 
+//Get All Comment
+const isLoadingComment = ref(false);
+const review = ref([]);
+const comment = ref({ message: null, rate: null, uid: null, updateAt: null });
 const getComment = async () => {
-  isLoading.value = true;
-  const { result } = await getOneDoc("products", route.params.id);
-  if (result.comments) {
-    result.comments.forEach(async (data, index, arr) => {
-      try {
-        const info = await getOneDoc("users", data.uid);
-        const { name, photo } = info.result;
-        return (arr[index] = { ...data, name, photo });
-      } catch (error) {
-        console.log(error);
-      }
-    });
-    setTimeout(() => {
-      review.value = result.comments;
-      isLoading.value = false;
-    }, 1000);
+  isLoadingComment.value = true;
+  try {
+    const { result } = await getOneDoc("products", route.params.id);
+    if (result.comments) {
+      result.comments.forEach(async (data, index, arr) => {
+        try {
+          const info = await getOneDoc("users", data.uid);
+          const { name, photo } = info.result;
+          return (arr[index] = { ...data, name, photo });
+        } catch (error) {
+          console.log(error);
+        }
+      });
+      setTimeout(() => {
+        review.value = result.comments;
+        isLoadingComment.value = false;
+      }, 1000);
+    } else {
+      review.value = [];
+      isLoadingComment.value = false;
+    }
+  } catch (error) {
+    isLoadingComment.value = false;
   }
 };
 getComment();
 
+//Send Comment
 const sendComment = async () => {
   if (comment.value != null) {
     comment.value.uid = user.value.uid;
@@ -123,15 +135,29 @@ const sendComment = async () => {
   }
 };
 
+//Get status Like / UnLike
+const status = ref();
+const getStatus = async () => {
+  if (user.value) {
+    const info = await getOneDoc("users", user.value.uid);
+    const { likes } = info.result;
+    status.value = likes[route.params.id];
+  }
+};
+getStatus();
+
+//Send Like / UnLike
 const like = async () => {
-  if (user.value)
-    await updateArray().updateLike("users", route.params.id, user.value.uid);
-  return;
+  if (user.value) {
+    await updateArray().like("users", route.params.id, user.value.uid);
+  }
+  await getStatus();
 };
 const unlike = async () => {
-  if (user.value)
+  if (user.value) {
     await updateArray().unLike("users", route.params.id, user.value.uid);
-  return;
+  }
+  await getStatus();
 };
 </script>
 <style scoped>

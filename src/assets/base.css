@@ -16,6 +16,8 @@ body {
   --blue: #1e90ff;
   --white: #ffffff;
   --main-color: #fcda9a;
+  --main-font: "Montez", cursive;
+  --main-font-2: "Suranna", serif;
 }
 
 .scroll-enter-active {

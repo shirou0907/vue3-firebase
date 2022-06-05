@@ -8,6 +8,7 @@ const router = createRouter({
       path: "/",
       name: "home",
       component: HomeView,
+      meta: { requiresAuth: true, isShow: true },
     },
     {
       path: "/about",
@@ -28,11 +29,13 @@ const router = createRouter({
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/AboutView.vue"),
+      meta: { requiresAuth: true, isShow: true },
     },
     {
       path: "/menu",
       name: "menu",
       component: () => import("../views/MenuView.vue"),
+      meta: { requiresAuth: true, isShow: true },
       children: [
         {
           path: ":id",
@@ -45,16 +48,19 @@ const router = createRouter({
       path: "/meal/:id",
       name: "meal",
       component: () => import("../views/MealView.vue"),
+      meta: { requiresAuth: true, isShow: true },
     },
     {
       path: "/login",
       name: "login",
       component: () => import("../components/auth/LoginForm.vue"),
+      meta: { requiresAuth: true, isShow: false },
     },
     {
       path: "/register",
       name: "register",
       component: () => import("../components/auth/RegisterForm.vue"),
+      meta: { requiresAuth: true, isShow: false },
     },
   ],
 });
