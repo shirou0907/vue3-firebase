@@ -57,7 +57,7 @@ watch(route, (newRoute) => {
   id.value = newRoute.params.id;
   getList();
 });
-console.log(id);
+// console.log(id);
 </script>
 <style scoped>
 .fade-enter-active {

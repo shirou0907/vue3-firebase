@@ -68,7 +68,7 @@ watch(route, (newRoute) => {
 
 //Get info User Logged in
 const user = computed(() => store.getters.getUser);
-console.log(user.value);
+// console.log(user.value);
 
 //Get Meal By Id
 const meal = ref("");
@@ -77,10 +77,10 @@ const getMeal = async (id) => {
   const res = await axios.get(
     `${import.meta.env.VITE_APP_API_URL}/lookup.php?i=${id}`
   );
-  meal.value = res.data.meals[0];
+  if (res.data.meals) meal.value = res.data.meals[0];
   const spice = [];
   for (let i = 1; i <= 20; i++) {
-    if (meal.value[`strIngredient${i}`] != "")
+    if (meal.value[`strIngredient${i}`])
       spice.push({
         name: meal.value[`strIngredient${i}`],
         mesure: meal.value[`strMeasure${i}`],
