@@ -5,14 +5,20 @@
       <div class="header-intro">DISCOVER THE MENU</div>
     </div>
     <div class="menu-meal row">
-      <menu-list class="col col-md-2"></menu-list>
-      <router-view class="col col-md-10"></router-view>
+      <div class="col col-md-2">
+        <div class="menu-category">Category</div>
+        <div class="menu-list">
+          <menu-list></menu-list>
+        </div>
+      </div>
+      <div class="col col-md-10">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
 <script setup>
 import MenuList from "../components/menu/MenuList.vue";
-import { ref } from "vue";
 </script>
 <style scoped>
 .wrap-menu {
@@ -20,7 +26,7 @@ import { ref } from "vue";
 
 .menu-header {
   min-height: 100vh;
-  background: url("@/assets/img/menu.jpg") center / cover no-repeat;
+  background: url("@/assets/img/header-bg.jpg") center / cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -38,5 +44,22 @@ import { ref } from "vue";
   text-transform: uppercase;
   color: #fff;
   font-family: "Suranna", serif;
+}
+
+.menu-category {
+  letter-spacing: 2px;
+  font-size: 36px;
+  font-weight: bold;
+  /* font-family: var(--main-font); */
+  text-align: center;
+  padding: 20px 0;
+}
+.menu-list {
+  overflow-y: auto;
+  cursor: grabbing;
+}
+
+.menu-list::-webkit-scrollbar {
+  display: none;
 }
 </style>

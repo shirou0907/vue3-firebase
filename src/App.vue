@@ -35,7 +35,6 @@ const scrollTop = () => {
 <style lang="scss">
 @import "@/assets/base.css";
 @import url("https://fonts.googleapis.com/css2?family=Montez&family=Roboto:wght@100&family=Suranna&display=swap");
-
 .button-home {
   position: fixed;
   bottom: 30px;
@@ -55,23 +54,23 @@ const scrollTop = () => {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 4px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 10px;
+  box-shadow: inset 0 0 5px var(--vue-color-2);
+  // border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: red;
+  background: var(--vue-color-1);
   border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b30000;
+  background: var(--vue-color-1);
 }
 </style>

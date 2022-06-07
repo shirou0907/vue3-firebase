@@ -3,10 +3,8 @@ import HomeStory from "../components/home/HomeStory.vue";
 import HomeReview from "../components/home/HomeReview.vue";
 import HomeCatering from "../components/home/HomeCatering.vue";
 import HomeContact from "../components/home/HomeContact.vue";
-// import { getData, updateData } from "@/repository/firestore";
-// getData("products").then((a) => console.log(a));
-// updateData("users", { like: [""] }, "adsasdad");
-// createOrUpdate("users", { active: true }, "adsasdad");
+import { checkPosition } from "@/composable/checkScroll.js";
+const { x, y } = checkPosition();
 </script>
 
 <template>
@@ -14,10 +12,12 @@ import HomeContact from "../components/home/HomeContact.vue";
     <div class="home-layer">
       <div class="home-intro">
         <div class="home-intro-p">Discovery</div>
-        <div class="home-intro-cook">
+
+        <!-- <div class="home-intro-cook">
           <img src="@/assets/img/dinner.png" alt="" />
-        </div>
+        </div> -->
         <div class="home-intro-title">cooking recipes</div>
+        <div class="home-intro-p">{{ x }} x {{ y }}</div>
       </div>
       <div class="home-img">
         <img class="home-img-left" src="@/assets/img/home-left.png" alt="" />
@@ -39,7 +39,7 @@ import HomeContact from "../components/home/HomeContact.vue";
 
 <style scoped>
 .home-layer {
-  background: url("@/assets/img/home.jpg") center / cover no-repeat;
+  background: url("@/assets/img/xbg.jpg") center / cover no-repeat;
   height: 100vh;
 }
 
@@ -50,6 +50,9 @@ import HomeContact from "../components/home/HomeContact.vue";
   left: 50%;
   text-align: center;
   z-index: 1;
+  padding: 20px;
+  text-shadow: 0 1px 10px #000;
+  backdrop-filter: blur(3px);
 }
 
 .home-intro-p {
@@ -64,11 +67,11 @@ import HomeContact from "../components/home/HomeContact.vue";
   color: #fff;
   font-family: "Suranna", serif;
 }
-.home-intro-cook img {
+/* .home-intro-cook img {
   width: 52px;
-}
+} */
 
-.home-intro-cook::after {
+/* .home-intro-cook::after {
   content: "";
   position: absolute;
   top: 50%;
@@ -89,7 +92,7 @@ import HomeContact from "../components/home/HomeContact.vue";
   border-top: 1px solid #fcda9a;
   border-bottom: 2px solid #fcda9a;
   width: 120px;
-}
+} */
 .home-img {
   position: absolute;
   top: 0;

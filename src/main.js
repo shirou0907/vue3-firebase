@@ -19,13 +19,11 @@ import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/css";
 app.use(VueAwesomeSwiper /* { default options with global component } */);
 
-//VueX
-import { createStore } from "vuex";
+//Vue
 import store from "@/store/index.js";
-const vuex = createStore(store);
-app.use(vuex);
+app.use(store);
 
-vuex.dispatch("checkUser");
+store.dispatch("checkUser");
 
 //Vue Router
 import router from "./router";

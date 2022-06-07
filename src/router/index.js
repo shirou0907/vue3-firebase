@@ -1,6 +1,9 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
+import store from "@/store/index.js";
+console.log(store);
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -13,23 +16,8 @@ const router = createRouter({
     {
       path: "/about",
       name: "about",
-      // children: [
-      //   {
-      //     name: "about-us",
-      //     path: "us",
-      //     component: () => import("../views/AboutUsView.vue"),
-      //   },
-      //   {
-      //     name: "about-us2",
-      //     path: "us2",
-      //     component: () => import("../views/AboutUsView2.vue"),
-      //   },
-      // ],
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import("../views/AboutView.vue"),
-      meta: { requiresAuth: true, isShow: true },
+      meta: { requiresAuth: false, isShow: true },
     },
     {
       path: "/menu",
@@ -41,6 +29,7 @@ const router = createRouter({
           path: ":id",
           name: "menu-category",
           component: () => import("../views/CategoryView.vue"),
+          meta: { disableScroll: true },
         },
       ],
     },
@@ -63,6 +52,20 @@ const router = createRouter({
       meta: { requiresAuth: true, isShow: false },
     },
   ],
+  scrollBehavior(to, from, savedPosition) {
+    if (!to.meta.disableScroll) {
+      return { top: 0 };
+    }
+  },
+});
+
+router.beforeEach((to, from, next) => {
+  // console.log(isAuth);
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    next();
+  } else {
+    next({ name: "login" });
+  }
 });
 
 export default router;

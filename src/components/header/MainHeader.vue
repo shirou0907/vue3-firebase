@@ -33,7 +33,7 @@
           >ABOUT</router-link
         >
         <router-link
-          to="/menu"
+          :to="{ name: 'menu-category', params: { id: 'beef' } }"
           class="header-link-item"
           active-class="header-link-active"
           >MENU</router-link
@@ -45,7 +45,7 @@
           >CONTACT</router-link
         >
         <router-link
-          :to="{ name: 'menu' }"
+          :to="{ name: 'menu-category', params: { id: 'beef' } }"
           class="header-link-item"
           active-class="header-link-active"
           >BLOG</router-link
@@ -120,7 +120,8 @@ const user = computed(() => store.getters.getUser);
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: rgb(0, 0, 0, 0.8);
+  background-color: #fff;
+  box-shadow: 0 1px 10px;
 }
 
 .header {
@@ -142,15 +143,16 @@ const user = computed(() => store.getters.getUser);
 .header-link-item {
   padding: 0 20px;
   text-decoration: none;
-  color: #fff;
+  color: #000;
   height: 100%;
   display: flex;
+  font-weight: bold;
   align-items: center;
 }
 
 .header-link-active {
-  color: #fcda9a;
-  border-bottom: 2px solid #fcda9a;
+  color: var(--vue-color-1);
+  border-bottom: 4px solid var(--vue-color-1);
 }
 
 .header-auth {
@@ -165,7 +167,7 @@ const user = computed(() => store.getters.getUser);
   align-items: centers;
 }
 .header-user-name {
-  color: #fff;
+  color: #000;
   font-size: 14px;
 }
 .header-user-img img {
