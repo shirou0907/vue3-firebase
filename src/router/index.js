@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
-import store from "@/store/index.js";
-console.log(store);
+// import store from "../store/index.js";
+// // console.log(store.getters.getStatus);
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,7 +17,7 @@ const router = createRouter({
       path: "/about",
       name: "about",
       component: () => import("../views/AboutView.vue"),
-      meta: { requiresAuth: false, isShow: true },
+      meta: { requiresAuth: true, isShow: true },
     },
     {
       path: "/menu",
@@ -52,20 +52,16 @@ const router = createRouter({
       meta: { requiresAuth: true, isShow: false },
     },
   ],
-  scrollBehavior(to, from, savedPosition) {
+  scrollBehavior(to) {
     if (!to.meta.disableScroll) {
       return { top: 0 };
     }
   },
 });
 
-router.beforeEach((to, from, next) => {
-  // console.log(isAuth);
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    next();
-  } else {
-    next({ name: "login" });
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   if (!store.getters.getStatus) router.push({ path: "login" });
+//   else next();
+// });
 
 export default router;

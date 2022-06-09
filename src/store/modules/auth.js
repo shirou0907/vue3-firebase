@@ -12,16 +12,16 @@ import {
 import { auth } from "@/firebase/config.js";
 import { createOrUpdate, updateData } from "@/repository/firestore/index.js";
 
+const authz = JSON.parse(localStorage.getItem("auth"));
 const moduleAuth = {
   namespace: true,
   state: () => ({
-    user: null,
-    isLogin: null,
+    user: authz ? authz.user : null,
+    isLogin: authz ? authz.isLogin : false,
   }),
   mutations: {
     setUser(state, user) {
       state.user = user;
-      // console.log(user);
     },
     setLogin(state, payload) {
       state.isLogin = payload;
@@ -41,7 +41,10 @@ const moduleAuth = {
         if (user) {
           commit("setLogin", true);
           commit("setUser", user);
-          localStorage.setItem("user", JSON.stringify(user));
+          localStorage.setItem(
+            "auth",
+            JSON.stringify({ user: user, isLogin: true })
+          );
           createOrUpdate("users", { active: true }, user.uid);
           updateData(
             "users",
@@ -123,6 +126,7 @@ const moduleAuth = {
           // Sign-out successful.
           commit("setLogin", false);
           commit("setUser", null);
+          localStorage.clear();
           dispatch("success", "Logout Success!");
         })
         .catch((error) => {

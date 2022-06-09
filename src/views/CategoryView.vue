@@ -28,29 +28,45 @@
     </div>
     <main-loading v-if="isLoading"></main-loading>
     <div v-else class="menu-list row">
-      <router-link
-        :to="{
-          name: 'meal',
-          params: { id: item.idMeal },
-        }"
-        class="menu-item col col-md-3"
-        v-for="(item, index) in fil"
-        :key="index"
-      >
-        <div class="wrap-image">
-          <transition name="fade">
-            <img
-              :src="item.strMealThumb"
-              @load="imgLoaded = true"
-              :class="[imgLoaded ? 'loading-image' : '']"
-              v-show="imgLoaded"
-            />
-          </transition>
+      <transition-group appear name="list">
+        <div
+          class="list-item col col-md-3"
+          v-for="(item, index) in fil"
+          :key="index"
+        >
+          <router-link
+            :to="{
+              name: 'meal',
+              params: { id: item.idMeal },
+            }"
+            class="menu-item"
+          >
+            <div class="wrap-image">
+              <img
+                :src="item.strMealThumb"
+                @load="imgLoaded = true"
+                :class="[imgLoaded ? 'loading-image' : '']"
+                v-show="imgLoaded"
+              />
+            </div>
+            <div class="item-title">
+              <p>{{ item.strMeal }}</p>
+            </div>
+          </router-link>
+          <div class="like-test">
+            <div
+              class="like-icon like-icon-active"
+              v-if="listLike.includes(item.idMeal)"
+              @click="unlike(item.idMeal)"
+            >
+              <font-awesome-icon :icon="['fas', 'heart']" />
+            </div>
+            <div class="like-icon" v-else @click="like(item.idMeal)">
+              <font-awesome-icon :icon="['fas', 'heart']" />
+            </div>
+          </div>
         </div>
-        <div class="item-title">
-          <p>{{ item.strMeal }}</p>
-        </div>
-      </router-link>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -59,6 +75,8 @@ import MainLoading from "@/components/loading/MainLoading.vue";
 import { ref, watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
+import { useStore } from "vuex";
+import { getOneDoc, updateArray } from "../repository/firestore";
 const id = ref("beef");
 const list = ref([]);
 const imgLoaded = ref("false");
@@ -75,6 +93,7 @@ const sortStatus = ref(true);
 const sort = () => {
   list.value.reverse();
 };
+
 const getList = async () => {
   isLoading.value = true;
   try {
@@ -89,6 +108,41 @@ const getList = async () => {
   }
 };
 getList();
+
+//Get info User Logged in
+const store = useStore();
+const user = computed(() => store.getters.getUser);
+//Get status Like / UnLike
+const status = ref([]);
+const listLike = ref([]);
+const getStatus = async () => {
+  if (user.value) {
+    const info = await getOneDoc("users", user.value.uid);
+    const { likes } = info.result;
+    status.value = likes;
+  }
+  listLike.value = [];
+  for (let i in status.value) {
+    if (status.value[i]) {
+      listLike.value = [...listLike.value, i];
+    }
+  }
+};
+getStatus();
+
+//Send Like / UnLike
+const like = async (id) => {
+  if (user.value) {
+    await updateArray().like("users", id, user.value.uid);
+  }
+  await getStatus();
+};
+const unlike = async (id) => {
+  if (user.value) {
+    await updateArray().unLike("users", id, user.value.uid);
+  }
+  await getStatus();
+};
 
 const route = useRoute();
 watch(route, (newRoute) => {
@@ -110,6 +164,17 @@ watch(route, (newRoute) => {
 }
 .fade-leave-to {
   opacity: 0;
+}
+
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: scale(0.8);
 }
 
 .wrap-list {
@@ -157,9 +222,12 @@ watch(route, (newRoute) => {
   cursor: pointer;
 }
 
+.list-item {
+  margin-top: 18px;
+}
+
 .menu-item {
   text-decoration: none;
-  margin-top: 16px;
 }
 
 .item-title p {
@@ -182,17 +250,45 @@ watch(route, (newRoute) => {
   width: 100%;
   object-fit: cover;
   height: 160px;
-  transform-origin: center 0;
-  transition: filter 0.2s, transform 0.2s ease-in;
+  transform-origin: 80% 40% 0;
+  transition: filter 0.3s, transform 0.3s ease-in-out;
 }
 
 .wrap-image:hover img {
   transform: scale(1.1);
+  filter: brightness(0.8);
+}
+
+.wrap-image:hover + .item-title p {
+  color: #000;
+  font-weight: 600;
+}
+
+.list-item:hover .like-icon {
+  opacity: 1;
 }
 
 .loading-image {
   height: 160px;
   background: transparent url("@/assets/img/loading-image.gif") center / cover
     no-repeat;
+}
+.like-test {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 10;
+}
+
+.like-icon {
+  transition: all ease-in 0.3s;
+  font-size: 24px;
+  opacity: 0;
+  color: #fff;
+  cursor: pointer;
+}
+
+.like-icon-active {
+  color: red;
 }
 </style>

@@ -67,7 +67,7 @@ const getListCategory = async () => {
 }
 
 .item-img:hover img {
-  transform: scale(1.05);
+  transform: rotate(10deg);
 }
 
 .item-img:hover + p {

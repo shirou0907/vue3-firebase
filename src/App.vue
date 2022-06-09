@@ -13,7 +13,9 @@ const scrollTop = () => {
 
 <template>
   <header>
-    <base-header v-if="route.meta.isShow && position < 160"></base-header>
+    <transition name="base">
+      <base-header v-if="route.meta.isShow && position < 160"></base-header>
+    </transition>
     <transition name="scroll">
       <main-header v-if="route.meta.isShow && position >= 160" />
     </transition>
@@ -34,7 +36,7 @@ const scrollTop = () => {
 
 <style lang="scss">
 @import "@/assets/base.css";
-@import url("https://fonts.googleapis.com/css2?family=Montez&family=Roboto:wght@100&family=Suranna&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montez&family=Roboto:wght@100&family=Suranna&display=swap");
 .button-home {
   position: fixed;
   bottom: 30px;

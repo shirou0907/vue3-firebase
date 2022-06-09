@@ -22,11 +22,11 @@ const { x, y } = checkPosition();
       <div class="home-img">
         <img class="home-img-left" src="@/assets/img/home-left.png" alt="" />
         <img class="home-img-right" src="@/assets/img/home-right.png" alt="" />
-        <img
+        <!-- <img
           class="home-img-bottom"
           src="@/assets/img/home-bottom.png"
           alt=""
-        />
+        /> -->
       </div>
     </div>
 
@@ -46,13 +46,13 @@ const { x, y } = checkPosition();
 .home-intro {
   position: absolute;
   top: 50%;
-  transform: translateY(-64%) translateX(-50%);
+  transform: translateY(-50%) translateX(-50%);
   left: 50%;
   text-align: center;
   z-index: 1;
   padding: 20px;
   text-shadow: 0 1px 10px #000;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(1px);
 }
 
 .home-intro-p {

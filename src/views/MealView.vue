@@ -5,6 +5,16 @@
     <div>{{ meal.strMeal }}</div>
     <p>{{ meal.strInstructions }}</p>
     <img :src="meal.strMealThumb" alt="" />
+    <iframe
+      v-if="meal.strYoutube"
+      width="885"
+      height="498"
+      :src="`https://www.youtube.com/embed/${meal.strYoutube}`"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
     <div class="wrap-spice row">
       <div
         v-for="(spice, index) in meal.spice"
@@ -62,6 +72,7 @@ import {
 // import { serverTimestamp } from "firebase/firestore";
 const route = useRoute();
 const store = useStore();
+//Check when id meal change
 watch(route, (newRoute) => {
   getMeal(newRoute.params.id);
 });
@@ -78,6 +89,11 @@ const getMeal = async (id) => {
     `${import.meta.env.VITE_APP_API_URL}/lookup.php?i=${id}`
   );
   if (res.data.meals) meal.value = res.data.meals[0];
+  meal.value.strYoutube
+    ? (meal.value.strYoutube = meal.value.strYoutube
+        .split("/")[3]
+        .substring(8, 19))
+    : (meal.value.strYoutube = null);
   const spice = [];
   for (let i = 1; i <= 20; i++) {
     if (meal.value[`strIngredient${i}`])

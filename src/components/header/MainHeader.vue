@@ -27,7 +27,7 @@
           >HOME</router-link
         >
         <router-link
-          to="/"
+          to="/about"
           class="header-link-item"
           active-class="header-link-active"
           >ABOUT</router-link

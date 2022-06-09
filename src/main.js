@@ -21,17 +21,14 @@ app.use(VueAwesomeSwiper /* { default options with global component } */);
 
 //Vue
 import store from "@/store/index.js";
-app.use(store);
-
 store.dispatch("checkUser");
 
 //Vue Router
 import router from "./router";
-app.use(router);
 
 import BootstrapVue3 from "bootstrap-vue-3";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue-3/dist/bootstrap-vue-3.css";
 app.use(BootstrapVue3);
 
-app.mount("#app");
+app.use(store).use(router).mount("#app");

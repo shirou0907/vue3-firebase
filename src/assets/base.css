@@ -18,12 +18,13 @@ body {
   --main-color: #fcda9a;
   --vue-color-1:#41b883;
   --vue-color-2: #35495e;
-  --main-font: "Montez", cursive;
+  --main-font: "Dancing Script", cursive;
+  --main-font-1: "Montez", cursive;
   --main-font-2: "Suranna", serif;
 }
 
 .scroll-enter-active {
-  transition: all 0.1s ease-out;
+  transition: all 0.4s ease-out;
 }
 
 .scroll-leave-active {
@@ -31,8 +32,18 @@ body {
 }
 
 .scroll-enter-from {
+  opacity: 0;
   transform: translateY(-20px);
 }
+
+.scroll-enter-to {
+  opacity: 1;
+}
+
+.scroll-leave-from {
+  opacity: 1;
+}
+
 .scroll-leave-to {
   opacity: 0;
   transform: translateY(-100px);
@@ -46,4 +57,21 @@ body {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.base-leave-active, .base-enter-active {
+  transition: all 0.5s ease-out;
+}
+
+.base-enter-from {
+  opacity: 0;
+  transform: translateY(-100%);
+}
+
+.base-leave-to {
+  opacity: 1;
+}
+
+.base-leave-to {
+  transform: translateY(-100%);
 }
