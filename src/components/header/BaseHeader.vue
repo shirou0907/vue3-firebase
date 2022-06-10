@@ -36,7 +36,7 @@
             >About</router-link
           >
           <router-link
-            :to="{ name: 'menu-category', params: { id: 'beef' } }"
+            :to="{ name: 'menu' }"
             class="header-link-item"
             active-class="header-link-active"
             >Menu</router-link
@@ -48,7 +48,7 @@
             >Contact</router-link
           >
           <router-link
-            :to="{ name: 'menu' }"
+            :to="{ name: 'menu-category', params: { id: 'beef' } }"
             class="header-link-item"
             active-class="header-link-active"
             >Blog</router-link

@@ -33,7 +33,7 @@
           >ABOUT</router-link
         >
         <router-link
-          :to="{ name: 'menu-category', params: { id: 'beef' } }"
+          :to="{ name: 'menu' }"
           class="header-link-item"
           active-class="header-link-active"
           >MENU</router-link
@@ -151,8 +151,18 @@ const user = computed(() => store.getters.getUser);
 }
 
 .header-link-active {
-  color: var(--vue-color-1);
-  border-bottom: 4px solid var(--vue-color-1);
+  background: linear-gradient(to right, var(--vue-color-1), var(--vue-color-2));
+  background-clip: text;
+  color: transparent;
+  -webkit-background-clip: text;
+  border-bottom: 4px solid;
+  /* border-image: source slice width outset repeat|initial|inherit; */
+  border-image: linear-gradient(
+      to right,
+      var(--vue-color-1),
+      var(--vue-color-2)
+    )
+    1;
 }
 
 .header-auth {

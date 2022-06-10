@@ -19,6 +19,10 @@
 </template>
 <script setup>
 import MenuList from "../components/menu/MenuList.vue";
+import { useRoute, useRouter } from "vue-router";
+const route = useRoute();
+const router = useRouter();
+route.params.id ? "" : router.push("/menu/beef");
 </script>
 <style scoped>
 .wrap-menu {

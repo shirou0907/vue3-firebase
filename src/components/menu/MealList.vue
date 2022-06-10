@@ -54,16 +54,28 @@
             </div>
           </router-link>
           <div class="like-test">
-            <div
-              class="like-icon like-icon-active"
-              v-if="listLike.includes(item.idMeal)"
-              @click="unlike(item.idMeal)"
-            >
-              <font-awesome-icon :icon="['fas', 'heart']" />
-            </div>
-            <div class="like-icon" v-else @click="like(item.idMeal)">
-              <font-awesome-icon :icon="['fas', 'heart']" />
-            </div>
+            <!-- <div class="placement">
+              <div
+                @click="
+                  isLike ? unlike(item.idMeal) : like(item.idMeal),
+                    (isLike = !isLike)
+                "
+                class="heart"
+                :class="[listLike.includes(item.idMeal) ? 'is-active' : '']"
+              ></div>
+            </div> -->
+            <transition name="like">
+              <div
+                class="like-icon like-icon-active"
+                v-if="listLike.includes(item.idMeal)"
+                @click="unlike(item.idMeal)"
+              >
+                <font-awesome-icon :icon="['fas', 'heart']" />
+              </div>
+              <div class="like-icon" v-else @click="like(item.idMeal)">
+                <font-awesome-icon :icon="['fas', 'heart']" />
+              </div>
+            </transition>
           </div>
         </div>
       </transition-group>
@@ -76,9 +88,10 @@ import { ref, watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import { useStore } from "vuex";
-import { getOneDoc, updateArray } from "../repository/firestore";
+import { getOneDoc, updateArray } from "@/repository/firestore";
 const id = ref("beef");
 const list = ref([]);
+// const isLike = ref("false");
 const imgLoaded = ref("false");
 const isLoading = ref(false);
 const mealKey = ref("");
@@ -151,6 +164,21 @@ watch(route, (newRoute) => {
 });
 </script>
 <style scoped>
+.heart {
+  width: 100px;
+  height: 100px;
+  background: url("https://cssanimation.rocks/images/posts/steps/heart.png")
+    no-repeat;
+  background-position: 0 0;
+  cursor: pointer;
+  transition: background-position 1s steps(28);
+  transition-duration: 0s;
+}
+.is-active {
+  transition-duration: 1s;
+  background-position: -2800px 0;
+}
+
 .fade-enter-active {
   transition: all 0.3s ease-out;
 }
@@ -290,5 +318,28 @@ watch(route, (newRoute) => {
 
 .like-icon-active {
   color: red;
+}
+
+.like-enter-from {
+  opacity: 0;
+  transform: scale(0.1);
+}
+
+.like-enter-to {
+  opacity: 1;
+}
+
+.like-leave-to {
+  opacity: 0;
+  transform: scale(0.1);
+}
+.like-move,
+.like-enter-active,
+.like-leave-active {
+  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.like-leave-active {
+  position: absolute;
 }
 </style>

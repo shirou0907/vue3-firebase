@@ -18,6 +18,14 @@ const router = createRouter({
       name: "about",
       component: () => import("../views/AboutView.vue"),
       meta: { requiresAuth: true, isShow: true },
+      children: [
+        {
+          path: ":id",
+          name: "menu-country",
+          component: () => import("../components/country/MealList.vue"),
+          meta: { disableScroll: true },
+        },
+      ],
     },
     {
       path: "/menu",
@@ -28,7 +36,7 @@ const router = createRouter({
         {
           path: ":id",
           name: "menu-category",
-          component: () => import("../views/CategoryView.vue"),
+          component: () => import("../components/menu/MealList.vue"),
           meta: { disableScroll: true },
         },
       ],
