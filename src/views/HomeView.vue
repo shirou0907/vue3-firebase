@@ -3,6 +3,7 @@ import HomeStory from "../components/home/HomeStory.vue";
 import HomeReview from "../components/home/HomeReview.vue";
 import HomeCatering from "../components/home/HomeCatering.vue";
 import HomeContact from "../components/home/HomeContact.vue";
+// import HomeSilde from "../components/home/HomeSilde.vue";
 import { checkPosition } from "@/composable/checkScroll.js";
 const { x, y } = checkPosition();
 </script>
@@ -16,8 +17,11 @@ const { x, y } = checkPosition();
         <!-- <div class="home-intro-cook">
           <img src="@/assets/img/dinner.png" alt="" />
         </div> -->
-        <div class="home-intro-title">cooking recipes</div>
-        <div class="home-intro-p">{{ x }} x {{ y }}</div>
+        <div class="home-intro-title">
+          If you are a chef, no matter how good a chef you are, it's not good
+          cooking for yourself; <br />the joy is in cooking for others.
+        </div>
+        <div class="home-intro-title">{{ x }} x {{ y }}</div>
       </div>
       <div class="home-img">
         <img class="home-img-left" src="@/assets/img/home-left.png" alt="" />
@@ -31,15 +35,16 @@ const { x, y } = checkPosition();
     </div>
 
     <HomeStory />
+    <HomeContact />
+    <!-- <HomeSilde /> -->
     <HomeCatering />
     <HomeReview />
-    <HomeContact />
   </div>
 </template>
 
 <style scoped>
 .home-layer {
-  background: url("@/assets/img/xbg.jpg") center / cover no-repeat;
+  background: url("@/assets/img/homez.jpg") center / cover no-repeat;
   height: 100vh;
 }
 
@@ -51,21 +56,17 @@ const { x, y } = checkPosition();
   text-align: center;
   z-index: 1;
   padding: 20px;
-  text-shadow: 0 1px 10px #000;
-  backdrop-filter: blur(1px);
+  color: #fff;
+  text-shadow: 0 1px #000;
 }
 
 .home-intro-p {
-  font-size: 60px;
-  color: #fcda9a;
-  font-family: "Montez", cursive;
+  font-size: 80px;
+  font-family: var(--main-font-1);
 }
 
 .home-intro-title {
-  font-size: 50px;
-  text-transform: uppercase;
-  color: #fff;
-  font-family: "Suranna", serif;
+  font-size: 20px;
 }
 /* .home-intro-cook img {
   width: 52px;

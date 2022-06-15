@@ -39,7 +39,7 @@
           >MENU</router-link
         >
         <router-link
-          to="/about"
+          to="/contact"
           class="header-link-item"
           active-class="header-link-active"
           >CONTACT</router-link
@@ -61,7 +61,9 @@
           </div>
         </transition>
         <div v-if="!status" class="header-unauth">
-          <router-link :to="{ name: 'login' }">Login</router-link>
+          <router-link class="header-link-item" :to="{ name: 'login' }"
+            >Login</router-link
+          >
         </div>
       </div>
     </div>

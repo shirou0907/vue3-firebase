@@ -1,8 +1,8 @@
 <template>
   <div class="wrap-menu">
     <div class="menu-header">
-      <div class="header-title">Delicious Cousine</div>
-      <div class="header-intro">DISCOVER THE MENU</div>
+      <div class="header-title">Delicious Cuisine</div>
+      <div class="header-intro">It is easy to learn how to cook learning</div>
     </div>
     <div class="menu-meal row">
       <div class="col col-md-2">
@@ -30,6 +30,8 @@ route.params.id ? "" : router.push("/menu/beef");
 
 .menu-header {
   min-height: 100vh;
+  text-shadow: 0 1px #000;
+  color: #fff;
   background: url("@/assets/img/header-bg.jpg") center / cover no-repeat;
   display: flex;
   align-items: center;
@@ -38,16 +40,13 @@ route.params.id ? "" : router.push("/menu/beef");
 }
 
 .header-title {
-  font-size: 60px;
-  color: #fcda9a;
-  font-family: "Montez", cursive;
+  font-size: 80px;
+  font-family: var(--main-font-1);
 }
 
 .header-intro {
-  font-size: 50px;
-  text-transform: uppercase;
+  font-size: 20px;
   color: #fff;
-  font-family: "Suranna", serif;
 }
 
 .menu-category {
@@ -59,11 +58,31 @@ route.params.id ? "" : router.push("/menu/beef");
   padding: 20px 0;
 }
 .menu-list {
-  overflow-y: auto;
+  overflow-y: hidden;
   cursor: grabbing;
 }
 
+.menu-list:hover {
+  overflow-y: scroll;
+}
 .menu-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+.menu-list::-webkit-scrollbar-track {
   display: none;
+}
+
+/* Handle */
+.menu-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+  height: 300px;
+}
+
+/* Handle on hover */
+.menu-list::-webkit-scrollbar-thumb:hover {
+  background: var(--vue-color-1);
 }
 </style>

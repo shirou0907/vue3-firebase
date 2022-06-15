@@ -42,7 +42,7 @@
             >Menu</router-link
           >
           <router-link
-            to="/about"
+            to="/contact"
             class="header-link-item"
             active-class="header-link-active"
             >Contact</router-link
@@ -63,9 +63,9 @@
               <!-- <div class="header-user-name">{{ user.displayName }}</div> -->
             </div>
           </transition>
-          <div v-if="!status" class="header-unauth">
+          <!-- <div v-if="!status" class="header-unauth">
             <router-link :to="{ name: 'login' }">Login</router-link>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -177,5 +177,10 @@ const user = computed(() => store.getters.getUser);
   height: 32px;
   box-shadow: 0 1px 4px #ccc;
   border-radius: 50%;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.9)
+  );
 }
 </style>

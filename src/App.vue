@@ -2,36 +2,48 @@
 import BaseHeader from "@/components/header/BaseHeader.vue";
 import MainHeader from "@/components/header/MainHeader.vue";
 import BaseFooter from "@/components/footer/BaseFooter.vue";
+import AppLoading from "@/components/loading/AppLoading.vue";
 import { checkPosition } from "@/composable/checkScroll.js";
 import { useRoute } from "vue-router";
+import { ref } from "vue";
 const route = useRoute();
 const { position } = checkPosition();
 const scrollTop = () => {
   window.scrollTo(0, 0);
 };
+// const isLoading = ref(true);
+// // const handleApp = () => {
+// //   setTimeout(() => {
+// //     isLoading.value = false;
+// //   }, 1500);
+// // };
+// // handleApp();
 </script>
 
 <template>
-  <header>
-    <transition name="base">
-      <base-header v-if="route.meta.isShow && position < 160"></base-header>
-    </transition>
-    <transition name="scroll">
-      <main-header v-if="route.meta.isShow && position >= 160" />
-    </transition>
+  <div class="app" v-if="!isLoading">
+    <header>
+      <transition name="base">
+        <base-header v-if="route.meta.isShow && position < 160"></base-header>
+      </transition>
+      <transition name="scroll">
+        <main-header v-if="route.meta.isShow && position >= 160" />
+      </transition>
 
-    <transition name="fade">
-      <div v-if="position > 1000" class="button-home" @click="scrollTop()">
-        <font-awesome-icon :icon="['fas', 'angles-up']" class="fa-fade" />
-      </div>
-    </transition>
-  </header>
+      <transition name="fade">
+        <div v-if="position > 1000" class="button-home" @click="scrollTop()">
+          <font-awesome-icon :icon="['fas', 'angles-up']" class="fa-fade" />
+        </div>
+      </transition>
+    </header>
 
-  <router-view></router-view>
+    <router-view></router-view>
 
-  <footer>
-    <base-footer v-if="route.meta.isShow" />
-  </footer>
+    <footer>
+      <base-footer v-if="route.meta.isShow" />
+    </footer>
+  </div>
+  <!-- <div class="app" v-if="isLoading"><app-loading></app-loading></div> -->
 </template>
 
 <style lang="scss">

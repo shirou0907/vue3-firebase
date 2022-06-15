@@ -1,31 +1,24 @@
 <template>
-  <base-fragment class="home-meal">
-    <div class="meal-title">Easy Recipes For A Beginner</div>
-    <base-wave class="wrap-wave"></base-wave>
+  <base-fragment>
     <swiper
       class="swiper"
       :modules="modules"
       :loop="true"
       :space-between="6"
-      :slides-per-view="5"
-      :autoplay="{ delay: 3500, disableOnInteraction: false }"
+      :slides-per-view="4"
+      :autoplay="{ delay: 1500, disableOnInteraction: false }"
     >
       <swiper-slide v-for="(data, index) in meals" :key="index">
-        <router-link
-          :to="{ name: 'meal', params: { id: data.id } }"
-          class="meal-body"
-        >
-          <div class="meal-img">
-            <img :src="data.img" alt="" />
-            <div class="meal-name">{{ data.name }}</div>
-          </div>
-        </router-link>
+        <div class="meal-body">
+          <div class="meal-img"><img :src="data.img" alt="" /></div>
+          <div class="meal-id">{{ data.id }}</div>
+          <div class="meal-name">{{ data.name }}</div>
+        </div>
       </swiper-slide>
-    </swiper>
-  </base-fragment>
+    </swiper></base-fragment
+  >
 </template>
 <script setup>
-import BaseWave from "@/components/base/BaseWave.vue";
 import BaseFragment from "@/components/base/BaseFragment.vue";
 import { ref } from "vue";
 import { Pagination, Autoplay } from "Swiper";
@@ -137,59 +130,8 @@ const meals = ref([
 ]);
 </script>
 <style scoped>
-.meal-title {
-  position: absolute;
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1;
-  font-size: 42px;
-  color: #fff;
-  font-family: var(--main-font);
-}
-.home-meal {
-  display: flex;
-  align-items: center;
-  padding: 0 40px;
-}
-.wrap-wave {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.meal-img {
-  overflow: hidden;
-  border-radius: 4px;
-}
-
 .meal-img img {
   width: 100%;
   height: 400px;
-  transform-origin: 80% 40% 0;
-  transition: filter 0.3s, transform 0.3s ease-in-out;
-}
-
-.meal-img:hover img {
-  transform: scale(1.1);
-  filter: brightness(0.8);
-}
-
-.meal-img:hover .meal-name {
-  opacity: 1;
-}
-
-.meal-name {
-  position: absolute;
-  bottom: 20px;
-  color: #fff;
-  text-align: center;
-  width: 100%;
-  opacity: 0;
-  font-size: 24px;
-  font-family: var(--main-font);
-  transition: all linear 0.4s;
 }
 </style>

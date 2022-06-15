@@ -13,13 +13,10 @@
             <div class="story-p">LOVE YOUR FOOD</div>
           </div>
           <div class="story-description">
-            Welcome. This is Royal plate. Elegant & sophisticated restaurant
-            template. Royal plate offers different home page layouts with smart
-            and unique design, showcasing beautifully designed elements every
-            restaurant website should have. Smooth animations, fast loading and
-            engaging user experience are just some of the features this template
-            offers. So, give it a try and dive into a world of royal restaurant
-            websites.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla
+            nesciunt numquam, obcaecati mollitia suscipit eligendi. Officia in
+            hic aspernatur corporis, dolores animi eveniet commodi labore vero
+            explicabo molestiae fugit deserunt.
           </div>
         </div>
       </div>

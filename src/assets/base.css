@@ -18,6 +18,7 @@ body {
   --main-color: #fcda9a;
   --vue-color-1:#41b883;
   --vue-color-2: #35495e;
+  --text-color: #1A2F33;
   --main-font: "Dancing Script", cursive;
   --main-font-1: "Montez", cursive;
   --main-font-2: "Suranna", serif;
@@ -51,7 +52,7 @@ body {
 
 .fade-enter-active,
 .fade-leave-active {
-  transition: all 1.5s ease-in;
+  transition: all 1s ease-in;
 }
 
 .fade-enter-from,

@@ -17,22 +17,22 @@ const rating = ref([
   {
     name: "Tung Pham Thanh",
     message:
-      "Really enjoyed our stay at Royal Plate. Delicious food, friendly staff and exquisite atmosphere. Recommend it!",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nesciunt numquam, obcaecati mollitia suscipit eligendi. Officia in hic aspernatur corporis, dolores animi eveniet commodi labore vero explicabo molestiae fugit deserunt.",
   },
   {
     name: "Anh Tuan",
     message:
-      "Best customer support and response time I have ever seen... not to mention a kick ass theme! Great feeling from this pourchase Thank you Pixel Industry!",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nesciunt numquam, obcaecati mollitia suscipit eligendi. Officia in hic aspernatur corporis, dolores animi eveniet commodi labore vero explicabo molestiae fugit deserunt.",
   },
   {
     name: "Truong Son",
     message:
-      "Really enjoyed our stay at Royal Plate. Delicious food, friendly staff and exquisite atmosphere. Recommend it!",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nesciunt numquam, obcaecati mollitia suscipit eligendi. Officia in hic aspernatur corporis, dolores animi eveniet commodi labore vero explicabo molestiae fugit deserunt.",
   },
   {
     name: "Manh Dung",
     message:
-      "Best customer support and response time I have ever seen... not to mention a kick ass theme! Great feeling from this pourchase Thank you Pixel Industry!",
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla nesciunt numquam, obcaecati mollitia suscipit eligendi. Officia in hic aspernatur corporis, dolores animi eveniet commodi labore vero explicabo molestiae fugit deserunt.",
   },
 ]);
 </script>
@@ -53,7 +53,7 @@ const rating = ref([
   padding: 40px 100px;
   color: #fff;
   text-align: center;
-  box-shadow: 0 2px 10px #fff;
+  box-shadow: 0 2px 10px #000;
 }
 
 .review-title {
