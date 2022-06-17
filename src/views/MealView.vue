@@ -1,24 +1,61 @@
 <template>
   <base-fragment>
+    <app-loading v-if="isLoading"></app-loading>
     <div class="row">
-      <div class="meal-view col col-md-8">
+      <div class="meal-view col col-md-9 col-sm-12">
         <div class="meal-name">{{ meal.strMeal }}</div>
 
-        <div class="meal-img">
-          <img :src="meal.strMealThumb" alt="" />
-        </div>
+        <div class="meal-cook row">
+          <div class="meal-img col col-md-6">
+            <img :src="meal.strMealThumb" alt="" />
+          </div>
 
+          <div class="wrap-spice col col-md-6 row">
+            <div
+              v-for="(spice, index) in meal.spice"
+              :key="index"
+              class="col col-md-3"
+            >
+              <img
+                class="spice-img"
+                :src="`https://www.themealdb.com/images/ingredients/${spice.name}-Small.png`"
+                alt=""
+              />
+              <div class="spice-info">
+                <div class="spice-name">
+                  {{ spice.name }}
+                </div>
+                <div class="spice-measure">
+                  {{ spice.mesure }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="meal-name">How to cook ?</div>
         <div
           class="meal-description"
-          v-for="(p, i) in meal.strInstructions"
-          :key="i"
+          :class="[seeMore ? 'meal-description-active' : '']"
         >
-          <div class="meal-description-item">{{ p }}</div>
+          <div
+            class="meal-description-item"
+            v-for="(p, i) in meal.strInstructions"
+            :key="i"
+          >
+            {{ p }}
+          </div>
+          <div
+            v-if="!seeMore"
+            class="meal-description-more"
+            @click="seeMore = true"
+          >
+            See More
+          </div>
         </div>
 
-        <div class="meal-video">
+        <div class="meal-video" v-if="meal.strYoutube">
+          <div class="meal-name">Follow the video tutorial</div>
           <iframe
-            v-if="meal.strYoutube"
             :src="`https://www.youtube.com/embed/${meal.strYoutube}`"
             title="YouTube video player"
             frameborder="0"
@@ -26,24 +63,8 @@
             allowfullscreen
           ></iframe>
         </div>
-        <div class="wrap-spice row">
-          <div
-            v-for="(spice, index) in meal.spice"
-            :key="index"
-            class="col col-md-3"
-          >
-            {{ spice.name }}
-            <img
-              :src="`https://www.themealdb.com/images/ingredients/${spice.name}-Small.png`"
-              alt=""
-            />
-            {{ spice.mesure }}
-          </div>
-        </div>
-        <button @click="like()" v-if="!status">Like</button>
-        <button @click="unlike()" v-if="status">Unlike</button>
       </div>
-      <div class="meal-suggest col col-md-4">
+      <div class="meal-suggest col col-md-3 col-sm-12">
         <div class="meal-suggest-title">Maybe you will like</div>
         <div class="meal-suggest-list">
           <div class="list-item" v-for="(item, index) in list" :key="index">
@@ -71,32 +92,109 @@
       </div>
     </div>
 
-    <div class="form-comment">
-      comment
-      <input
-        type="text"
-        name="comment"
-        id="comment"
-        v-model="comment.message"
-      />
-      rate
-      <input type="number" v-model="comment.rate" />
-      <button @click="sendComment()">Send</button>
+    <div class="meal-rating">
+      <div class="form-rating" v-if="isLogin">
+        <div class="rating-title">Leave a reply {{ comment.rate }}</div>
+        <div class="rating-btn">
+          <font-awesome-icon
+            :class="[comment.rate >= 1 ? 'rate-icon-active' : 'rate-icon']"
+            :icon="['fas', 'star']"
+            @click="comment.rate = 1"
+          />
+          <font-awesome-icon
+            :class="[comment.rate >= 2 ? 'rate-icon-active' : 'rate-icon']"
+            :icon="['fas', 'star']"
+            @click="comment.rate = 2"
+          />
+          <font-awesome-icon
+            :class="[comment.rate >= 3 ? 'rate-icon-active' : 'rate-icon']"
+            :icon="['fas', 'star']"
+            @click="comment.rate = 3"
+          />
+          <font-awesome-icon
+            :class="[comment.rate >= 4 ? 'rate-icon-active' : 'rate-icon']"
+            :icon="['fas', 'star']"
+            @click="comment.rate = 4"
+          />
+          <font-awesome-icon
+            :class="[comment.rate >= 5 ? 'rate-icon-active' : 'rate-icon']"
+            :icon="['fas', 'star']"
+            @click="comment.rate = 5"
+          />
+        </div>
+        <textarea
+          type="text"
+          name="comment"
+          id="comment"
+          placeholder="Enter your comment here ..."
+          v-model="comment.message"
+        />
+        <!-- <input type="number" v-model.number="comment.rate" /> -->
+        <div class="d-flex" style="justify-content: flex-end; margin-top: 12px">
+          <div
+            class="rating-send"
+            :class="[checkComment ? 'rating-send--active' : '']"
+            @click="sendComment()"
+          >
+            Send
+          </div>
+        </div>
+      </div>
+      <div class="form-rating" v-else>
+        <router-link :to="{ name: 'login' }">Login to commment now</router-link>
+      </div>
     </div>
     <div class="meal-review">
       <p v-if="isLoadingComment">Loading...</p>
-      <div class="row" v-for="(data, index) in review" :key="index">
-        <div v-if="data.name" class="col col-md-6">
-          {{ data.message }}
-          {{ data.rate }}
-          {{ data.name }}
-          <img :src="data.photo" alt="" width="32" />
+      <div class="row review-list">
+        <div
+          class="col col-md-12 review-item"
+          v-for="(data, index) in review"
+          :key="index"
+        >
+          <div class="review-header">
+            <div class="review-name">
+              <div class="review-info">
+                <img :src="data.photo" alt="" width="32" />
+                {{ data.name }}
+              </div>
+              <div class="rating-btn">
+                <font-awesome-icon
+                  :class="[data.rate >= 1 ? 'rate-icon-active' : 'rate-icon']"
+                  :icon="['fas', 'star']"
+                />
+                <font-awesome-icon
+                  :class="[data.rate >= 2 ? 'rate-icon-active' : 'rate-icon']"
+                  :icon="['fas', 'star']"
+                />
+                <font-awesome-icon
+                  :class="[data.rate >= 3 ? 'rate-icon-active' : 'rate-icon']"
+                  :icon="['fas', 'star']"
+                />
+                <font-awesome-icon
+                  :class="[data.rate >= 4 ? 'rate-icon-active' : 'rate-icon']"
+                  :icon="['fas', 'star']"
+                />
+                <font-awesome-icon
+                  :class="[data.rate >= 5 ? 'rate-icon-active' : 'rate-icon']"
+                  :icon="['fas', 'star']"
+                />
+              </div>
+            </div>
+            <div class="review-date">
+              {{ new Date(data.updateAt).toLocaleString() }}
+            </div>
+          </div>
+          <div class="review-footer">
+            {{ data.message }}
+          </div>
         </div>
       </div>
     </div>
   </base-fragment>
 </template>
 <script setup>
+import AppLoading from "@/components/loading/AppLoading.vue";
 import BaseFragment from "@/components/base/BaseFragment.vue";
 import { ref, computed, watch } from "vue";
 import axios from "axios";
@@ -108,19 +206,24 @@ import {
   updateArray,
 } from "../repository/firestore";
 
+const seeMore = ref(false);
+
 //Check when id meal change
 const route = useRoute();
 const store = useStore();
-watch(route, (newRoute) => {
-  getMeal(newRoute.params.id);
+watch(route, async (newRoute) => {
+  await renderData(newRoute.params.id);
 });
 
 //Get info User Logged in
 const user = computed(() => store.getters.getUser);
+const isLogin = computed(() => store.getters.getStatus);
 
 //Get Meal By Id
+const isLoading = ref(false);
 const meal = ref("");
 const getMeal = async (id) => {
+  isLoading.value = true;
   await createOrUpdate("products", { active: true }, route.params.id);
   const res = await axios.get(
     `${import.meta.env.VITE_APP_API_URL}/lookup.php?i=${id}`
@@ -143,17 +246,14 @@ const getMeal = async (id) => {
   const random = Math.floor(Math.random() * spice.length);
   i.value = spice[random].name;
   meal.value = { ...meal.value, spice };
-  getList();
+  isLoading.value = false;
 };
-getMeal(route.params.id);
 
 //Get list meal by random
 const i = ref("lemon");
 const list = ref([]);
 const imgLoaded = ref("false");
-const isLoading = ref(false);
 const getList = async () => {
-  isLoading.value = true;
   try {
     const res = await axios.get(
       `${import.meta.env.VITE_APP_API_URL}/filter.php?i=${i.value}`
@@ -169,7 +269,7 @@ const getList = async () => {
 //Get All Comment
 const isLoadingComment = ref(false);
 const review = ref([]);
-const comment = ref({ message: null, rate: null, uid: null, updateAt: null });
+const comment = ref({ message: null, rate: 0, uid: null, updateAt: null });
 const getComment = async () => {
   isLoadingComment.value = true;
   try {
@@ -185,7 +285,7 @@ const getComment = async () => {
         }
       });
       setTimeout(() => {
-        review.value = result.comments;
+        review.value = result.comments.reverse();
         isLoadingComment.value = false;
       }, 1000);
     } else {
@@ -196,50 +296,54 @@ const getComment = async () => {
     isLoadingComment.value = false;
   }
 };
-getComment();
 
 //Send Comment
 const sendComment = async () => {
-  if (comment.value != null) {
-    comment.value.uid = user.value.uid;
-    await updateArray().updateComment(
-      "products",
-      comment.value,
-      route.params.id
-    );
-    await getComment();
+  if (comment.value.message && comment.value.rate) {
+    const currenttime = +new Date();
+    if (comment.value != null) {
+      comment.value.uid = user.value.uid;
+      comment.value.updateAt = currenttime;
+      await updateArray().updateComment(
+        "products",
+        comment.value,
+        route.params.id
+      );
+      await getComment();
+      comment.value = { message: null, rate: 0, uid: null, updateAt: null };
+    }
+  } else {
+    alert("Please enter your comment");
   }
 };
 
-//Get status Like / UnLike
-const status = ref();
-const getStatus = async () => {
-  if (user.value) {
-    const info = await getOneDoc("users", user.value.uid);
-    const { likes } = info.result;
-    console.log(likes);
-    status.value = likes[route.params.id];
-  }
-};
-getStatus();
+//Check validate comment
+const checkComment = computed(() => {
+  if (comment.value.message && comment.value.rate) return true;
+  return false;
+});
 
-//Send Like / UnLike
-const like = async () => {
-  if (user.value) {
-    await updateArray().like("users", route.params.id, user.value.uid);
-  }
-  await getStatus();
+//Render all data meal
+const renderData = async (id) => {
+  await getMeal(id);
+  await getList();
+  await getComment();
+  // await Promise.all([getMeal(id), getList(), getComment()]);
 };
-const unlike = async () => {
-  if (user.value) {
-    await updateArray().unLike("users", route.params.id, user.value.uid);
-  }
-  await getStatus();
-};
+
+renderData(route.params.id);
 </script>
 <style scoped>
+.rate-icon {
+  color: #ccc;
+  cursor: pointer;
+}
+.rate-icon-active {
+  cursor: pointer;
+  color: rgb(229, 229, 7);
+}
 .wrap-fragment {
-  padding: 200px 160px;
+  padding: 200px 90px;
   background-color: #fcfcfc;
 }
 
@@ -247,27 +351,112 @@ const unlike = async () => {
   font-size: 60px;
   font-family: var(--main-font);
   font-weight: 750;
+  margin-top: 20px;
 }
 .meal-description {
+  max-height: 300px;
+  overflow: hidden;
+  border: 2px dashed #000;
+  padding: 20px;
 }
 .meal-description-item {
   font-style: italic;
-  font-family: serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
-.meal-img img {
-  width: 400px;
-  height: 260px;
+
+.meal-description-active {
+  max-height: none;
+  overflow: auto;
 }
-.meal-video iframe{
+
+.meal-description-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
   width: 100%;
-  height: 460px;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
+  height: 40px;
+  cursor: pointer;
+}
+
+.meal-img img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.spice-name {
+  font-size: 14px;
+}
+.spice-img {
+  margin-bottom: 20px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.spice-img:hover + .spice-info {
+  display: flex;
+  opacity: 1;
+}
+.spice-info {
+  font-family: serif;
+  font-size: 12px;
+  position: absolute;
+  top: -50px;
+  left: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border: 0px solid rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  width: 100px;
+  height: 48px;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  animation: fade linear 0.4s;
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.spice-info::before {
+  content: "";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  border-left: 10px solid transparent;
+  border-top: 10px solid rgba(0, 0, 0, 0.8);
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid transparent;
+}
+.meal-video iframe {
+  width: 100%;
+  height: 600px;
+  padding: 20px;
 }
 
 .meal-suggest {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 1px 2px #000;
+  /* box-shadow: 0 1px 2px #000; */
 }
 
 .meal-suggest-list:hover {
@@ -298,20 +487,20 @@ const unlike = async () => {
   color: var(--text-color);
   font-size: 26px;
   font-weight: 900;
-  font-family: "Playfair Display", serif;
+  font-family: var(--main-font);
   text-align: center;
   padding-bottom: 20px;
 }
 
 .meal-suggest-list {
-  max-height: 160vh;
+  max-height: 120vh;
   padding: 0 20px;
   overflow-y: hidden;
   cursor: grabbing;
 }
 
 .list-item {
-  margin-bottom: 18px;
+  margin-bottom: 24px;
 }
 
 .menu-item {
@@ -342,7 +531,7 @@ const unlike = async () => {
 .wrap-image img {
   width: 100%;
   object-fit: cover;
-  height: 200px;
+  height: 160px;
   transform-origin: 80% 40% 0;
   transition: filter 0.3s, transform 0.3s ease-in-out;
 }
@@ -360,5 +549,67 @@ const unlike = async () => {
   height: 160px;
   background: transparent url("@/assets/img/loading-image.gif") center / cover
     no-repeat;
+}
+
+.meal-feeling {
+  width: 60px;
+}
+
+.meal-rating {
+  border-bottom: 1px solid #ccc;
+  padding: 20px 0;
+}
+
+.form-rating textarea {
+  width: 100%;
+  border-radius: 6px;
+  outline: none;
+  padding: 10px 12px;
+  font-style: italic;
+}
+
+.rating-title {
+  font-size: 30px;
+  font-weight: 600;
+  font-family: var(--main-font);
+}
+
+.rating-btn {
+  margin-bottom: 12px;
+}
+
+.rating-send {
+  padding: 10px 20px;
+  background-color: var(--vue-color-2);
+  width: 80px;
+  text-align: center;
+  color: #fff;
+  border-radius: 8px;
+  cursor: not-allowed;
+}
+
+.rating-send--active {
+  background-color: var(--vue-color-1);
+  cursor: pointer;
+}
+
+.rating-send--active:hover {
+  filter: brightness(1.2);
+}
+
+.review-list {
+  
+}
+
+.review-item {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-top: 12px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
 }
 </style>

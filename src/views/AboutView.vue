@@ -38,6 +38,7 @@
             <transition-group name="flag">
               <div class="col col-md-4" v-for="(flag, i) in list" :key="i">
                 <router-link
+                  @click="isOpen = false"
                   class="country-item"
                   :to="{
                     name: 'menu-country',
@@ -62,10 +63,10 @@
 </template>
 
 <script setup>
-import { checkPosition } from "@/composable/checkScroll.js";
+// import { checkPosition } from "@/composable/checkScroll.js";
 import BaseFragment from "@/components/base/BaseFragment.vue";
 import flags from "@/composable/nationalFlag.js";
-import { ref, computed, onMounted, onUnmounted } from "vue";
+import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
 const isOpen = ref(true);
@@ -81,17 +82,17 @@ const list = computed(() => {
   });
 });
 
-const { position } = checkPosition();
-const handleScroll = () => {
-  position.value == 800 ? (isOpen.value = true) : " ";
-};
-onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
-});
+// const { position } = checkPosition();
+// const handleScroll = () => {
+//   position.value == 800 ? (isOpen.value = true) : " ";
+// };
+// onMounted(() => {
+//   window.addEventListener("scroll", handleScroll);
+// });
 
-onUnmounted(() => {
-  window.removeEventListener("scroll", handleScroll);
-});
+// onUnmounted(() => {
+//   window.removeEventListener("scroll", handleScroll);
+// });
 </script>
 
 <style scoped>
@@ -162,6 +163,8 @@ onUnmounted(() => {
 .country-list {
   padding: 20px 12px;
   background-color: #fcfcfc;
+  max-height: 100vh;
+  overflow: auto;
 }
 
 .country-list-input {

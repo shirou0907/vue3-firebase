@@ -2,26 +2,17 @@
 import BaseHeader from "@/components/header/BaseHeader.vue";
 import MainHeader from "@/components/header/MainHeader.vue";
 import BaseFooter from "@/components/footer/BaseFooter.vue";
-import AppLoading from "@/components/loading/AppLoading.vue";
 import { checkPosition } from "@/composable/checkScroll.js";
 import { useRoute } from "vue-router";
-import { ref } from "vue";
 const route = useRoute();
 const { position } = checkPosition();
 const scrollTop = () => {
   window.scrollTo(0, 0);
 };
-// const isLoading = ref(true);
-// // const handleApp = () => {
-// //   setTimeout(() => {
-// //     isLoading.value = false;
-// //   }, 1500);
-// // };
-// // handleApp();
 </script>
 
 <template>
-  <div class="app" v-if="!isLoading">
+  <div class="app">
     <header>
       <transition name="base">
         <base-header v-if="route.meta.isShow && position < 160"></base-header>
@@ -43,7 +34,6 @@ const scrollTop = () => {
       <base-footer v-if="route.meta.isShow" />
     </footer>
   </div>
-  <!-- <div class="app" v-if="isLoading"><app-loading></app-loading></div> -->
 </template>
 
 <style lang="scss">
