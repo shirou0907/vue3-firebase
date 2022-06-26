@@ -51,19 +51,37 @@
           >BLOG</router-link
         >
       </div>
-      <div class="header-user" @click="store.dispatch('logout')">
-        <transition name="slide-fade">
-          <div v-if="status" class="header-auth">
-            <div class="header-user-img">
-              <img :src="user.photoURL" />
-            </div>
-            <div class="header-user-name">{{ user.displayName }}</div>
+      <div class="header-user">
+        <div v-if="status" class="header-auth">
+          <div class="header-user-img">
+            <img :src="user.photoURL" />
           </div>
-        </transition>
+          <div class="header-user-name">{{ user.displayName }}</div>
+        </div>
         <div v-if="!status" class="header-unauth">
           <router-link class="header-link-item" :to="{ name: 'login' }"
             >Login</router-link
           >
+        </div>
+        <div v-if="status" class="header-user-setting">
+          <div class="setting-list">
+            <div class="setting-item">
+              <router-link to="/user/profile">
+                <font-awesome-icon :icon="['fas', 'address-card']" /> User
+                Profile</router-link
+              >
+            </div>
+            <div class="setting-item">
+              <router-link to="/user/liked">
+                <font-awesome-icon :icon="['fas', 'thumbs-up']" />
+                Meal Liked</router-link
+              >
+            </div>
+            <div class="setting-item" @click="store.dispatch('logout')">
+              <font-awesome-icon :icon="['fas', 'right-from-bracket']" />
+              Logout
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -81,24 +99,23 @@ const openSearch = ref(false);
 const closeSearch = () => {
   openSearch.value = false;
 };
+// const status = ref(false);
 const status = computed(() => store.getters.getStatus);
 const user = computed(() => store.getters.getUser);
 </script>
 
 <style scoped>
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.25s ease-out;
 }
-
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from {
-  transform: translateX(20px);
-}
-.slide-fade-leave-to {
+.slide-up-enter-from {
   opacity: 0;
+  transform: translateY(30px);
+}
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
 }
 
 .tab-enter-active {
@@ -174,6 +191,10 @@ const user = computed(() => store.getters.getUser);
   align-items: center;
 }
 
+.header-user:hover .header-user-setting {
+  display: block;
+}
+
 .header-user {
   display: flex;
   align-items: centers;
@@ -188,5 +209,57 @@ const user = computed(() => store.getters.getUser);
   height: 32px;
   box-shadow: 0 1px 4px #ccc;
   border-radius: 50%;
+}
+
+.header-user-setting {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  z-index: 10;
+  display: none;
+}
+
+.setting-list {
+  min-width: 160px;
+  background-color: #ccc;
+  border-radius: 4px;
+  box-shadow: 0 1px 4px #ccc;
+  padding: 12px 0;
+}
+
+.setting-list::before {
+  content: "";
+  position: absolute;
+  height: 24px;
+  top: -30px;
+  left: 50%;
+  border-left: 20px solid transparent;
+  border-bottom: 20px solid #ccc;
+  border-top: 20px solid transparent;
+  border-right: 20px solid transparent;
+}
+
+.setting-item {
+  cursor: pointer;
+}
+
+.setting-item:last-child {
+  padding: 10px 12px;
+}
+
+.setting-item a {
+  width: 100%;
+  padding: 10px 12px;
+  display: block;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.setting-item svg {
+  margin-right: 6px;
+}
+
+.setting-item:hover {
+  background-color: #fff;
 }
 </style>

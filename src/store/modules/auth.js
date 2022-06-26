@@ -77,6 +77,18 @@ const moduleAuth = {
       }
     },
 
+    async updateUser({ dispatch }, { name, photo }) {
+      try {
+        await updateProfile(auth.currentUser, {
+          displayName: name,
+          photoURL: photo,
+        });
+        dispatch("success", "User created!");
+      } catch (error) {
+        dispatch("error", error.message);
+      }
+    },
+
     async loginWithEmail({ commit, dispatch }, { email, password }) {
       try {
         const user = await signInWithEmailAndPassword(auth, email, password);

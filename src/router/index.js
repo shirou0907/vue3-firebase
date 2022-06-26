@@ -17,6 +17,24 @@ const router = createRouter({
       meta: { requiresAuth: true, isShow: true },
     },
     {
+      path: "/user",
+      name: "user",
+      component: () => import("../views/UserView.vue"),
+      meta: { requiresAuth: true, isShow: true },
+      children: [
+        {
+          path: "profile",
+          name: "profile",
+          component: () => import("../components/user/UserSetting.vue"),
+        },
+        {
+          path: "liked",
+          name: "liked",
+          component: () => import("../components/user/UserMeal.vue"),
+        },
+      ],
+    },
+    {
       path: "/about",
       name: "about",
       component: () => import("../views/AboutView.vue"),
