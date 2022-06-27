@@ -3,6 +3,7 @@
     <div class="col col-md-4">
       <div class="user-option">
         <div class="user-title">Setting</div>
+        <hr />
         <div class="user-link">
           <router-link class="link-item" :to="{ name: 'profile' }"
             >Change Profile</router-link
@@ -15,7 +16,11 @@
     </div>
     <div class="col col-md-8">
       <div class="user-dialog">
-        <router-view></router-view>
+        <router-view v-slot="{ Component }">
+          <keep-alive>
+            <component :is="Component" :key="$route.fullPath"></component>
+          </keep-alive>
+        </router-view>
       </div>
     </div>
   </base-fragment>
