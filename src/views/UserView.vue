@@ -77,6 +77,8 @@ export default {
     background-color: #fff;
     border-radius: 8px;
     min-height: 400px;
+    max-height: 600px;
+    overflow-y: auto;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   }
 }

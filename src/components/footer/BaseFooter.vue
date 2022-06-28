@@ -84,7 +84,7 @@ const text = ref("Subscribe to our newsletter");
 </script>
 <style scoped>
 .wrap-footer {
-  background-color: #000;
+  background: url("@/assets/img/meal-bg.jpg") center / cover no-repeat;
 }
 
 .footer {

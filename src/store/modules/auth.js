@@ -147,7 +147,7 @@ const moduleAuth = {
     },
 
     async verifyUser({ dispatch }) {
-      sendEmailVerification(auth.currentUser).then(() => {
+      sendEmailVerification(auth.currentUser).then(() => {  64
         dispatch("success", "Verification email sent!");
       });
     },

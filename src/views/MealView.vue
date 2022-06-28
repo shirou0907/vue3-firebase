@@ -1,6 +1,7 @@
 <template>
   <base-fragment>
     <app-loading v-if="isLoading"></app-loading>
+    <div class="meal-top"></div>
     <div class="row">
       <div class="meal-view col col-md-9 col-sm-12">
         <div class="meal-name">{{ meal.strMeal }}</div>
@@ -345,6 +346,14 @@ renderData(route.params.id);
 .wrap-fragment {
   padding: 200px 90px;
   background-color: #fcfcfc;
+}
+
+.meal-top {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .meal-name {

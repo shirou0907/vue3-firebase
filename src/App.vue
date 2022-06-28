@@ -9,10 +9,20 @@ const { position } = checkPosition();
 const scrollTop = () => {
   window.scrollTo(0, 0);
 };
+
+const checkWidth = () => {
+  if (window.innerWidth > 768) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+console.log(checkWidth());
 </script>
 
 <template>
-  <div class="app">
+  <div class="app" v-if="checkWidth()">
     <header>
       <transition name="base">
         <base-header v-if="route.meta.isShow && position < 160"></base-header>
@@ -34,11 +44,22 @@ const scrollTop = () => {
       <base-footer v-if="route.meta.isShow" />
     </footer>
   </div>
+  <div id="not-support" v-else></div>
 </template>
 
 <style lang="scss">
 @import "@/assets/base.css";
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montez&family=Roboto:wght@100&family=Suranna&display=swap");
+.app {
+  min-width: 1200px;
+  overflow-y: auto;
+}
+
+#not-support {
+  background: url("https://store.gs25.com.vn/images/notsupportmb.png") center / cover no-repeat;
+  height: 100vh;
+}
+
 .button-home {
   position: fixed;
   bottom: 30px;

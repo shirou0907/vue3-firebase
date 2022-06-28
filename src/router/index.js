@@ -63,6 +63,12 @@ const router = createRouter({
       ],
     },
     {
+      path: "/blog",
+      name: "blog",
+      component: () => import("../views/BlogView.vue"),
+      meta: { requiresAuth: true, isShow: true },
+    },
+    {
       path: "/meal/:id",
       name: "meal",
       component: () => import("../views/MealView.vue"),

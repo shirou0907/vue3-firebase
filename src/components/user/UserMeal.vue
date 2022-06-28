@@ -68,7 +68,7 @@ getStatus();
 </script>
 <style scoped>
 .wrap-like {
-  min-height: 600px;
+
 }
 .like-title {
   font-size: 20px;

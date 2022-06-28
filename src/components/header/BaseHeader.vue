@@ -13,13 +13,14 @@
     </div>
     <div class="header">
       <div class="header-logo">
-        <img
-          alt="Vue logo"
-          class="logo"
-          src="@/assets/logo.svg"
-          width="40"
-          height="40"
-        />
+        <a href="/"
+          ><img
+            alt="Vue logo"
+            class="logo"
+            src="@/assets/logo.svg"
+            width="40"
+            height="40"
+        /></a>
       </div>
       <div class="header-right">
         <div class="header-link">
@@ -48,7 +49,7 @@
             >Contact</router-link
           >
           <router-link
-            :to="{ name: 'menu-category', params: { id: 'beef' } }"
+            :to="{ name: 'blog' }"
             class="header-link-item"
             active-class="header-link-active"
             >Blog</router-link
@@ -102,6 +103,7 @@ const user = computed(() => store.getters.getUser);
   left: 0;
   right: 0;
   z-index: 1000;
+  min-width: 1200px;
 }
 
 .header-top {
@@ -175,6 +177,7 @@ const user = computed(() => store.getters.getUser);
   display: block;
   margin-right: 8px;
   height: 32px;
+  width: 32px;
   box-shadow: 0 1px 4px #ccc;
   border-radius: 50%;
   background: linear-gradient(

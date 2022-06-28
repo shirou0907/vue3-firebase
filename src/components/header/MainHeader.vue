@@ -2,13 +2,14 @@
   <div class="wrap-header">
     <div class="header">
       <div class="header-logo">
-        <img
-          alt="Vue logo"
-          class="logo"
-          src="@/assets/logo.svg"
-          width="40"
-          height="40"
-        />
+        <a href="/"
+          ><img
+            alt="Vue logo"
+            class="logo"
+            src="@/assets/logo.svg"
+            width="40"
+            height="40"
+        /></a>
         <div class="header-search">
           <div class="header-link-item" @click="openSearch = !openSearch">
             <font-awesome-icon
@@ -45,7 +46,7 @@
           >CONTACT</router-link
         >
         <router-link
-          :to="{ name: 'menu-category', params: { id: 'beef' } }"
+          :to="{ name: 'blog' }"
           class="header-link-item"
           active-class="header-link-active"
           >BLOG</router-link
@@ -136,18 +137,21 @@ const user = computed(() => store.getters.getUser);
   padding: 0 40px;
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 16px;
+  right: 16px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   z-index: 1000;
   background-color: #fff;
   box-shadow: 0 1px 10px;
+  min-width: 1200px;
 }
 
 .header {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  min-height: 68px;
+  min-height: 88px;
 }
 .header-logo {
   min-width: 160px;
@@ -160,13 +164,27 @@ const user = computed(() => store.getters.getUser);
 }
 
 .header-link-item {
-  padding: 0 20px;
+  padding: 0 10px;
   text-decoration: none;
   color: #000;
   height: 100%;
   display: flex;
   font-weight: bold;
   align-items: center;
+  min-width: 120px;
+  text-align: center;
+  justify-content: center;
+}
+
+.header-link-active::before {
+  content: "";
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  right: 10px;
+  height: 3px;
+  background: linear-gradient(to right, var(--vue-color-1), var(--vue-color-2));
+  border-radius: 20px;
 }
 
 .header-link-active {
@@ -174,14 +192,6 @@ const user = computed(() => store.getters.getUser);
   background-clip: text;
   color: transparent;
   -webkit-background-clip: text;
-  border-bottom: 4px solid;
-  /* border-image: source slice width outset repeat|initial|inherit; */
-  border-image: linear-gradient(
-      to right,
-      var(--vue-color-1),
-      var(--vue-color-2)
-    )
-    1;
 }
 
 .header-auth {
@@ -207,6 +217,7 @@ const user = computed(() => store.getters.getUser);
   display: block;
   margin-right: 8px;
   height: 32px;
+  width: 32px;
   box-shadow: 0 1px 4px #ccc;
   border-radius: 50%;
 }
