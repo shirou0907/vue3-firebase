@@ -15,20 +15,20 @@
 </template>
 
 <script>
-import { Pagination, Autoplay } from "Swiper";
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import { pagination, autoplay } from "Swiper";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 
 export default {
   components: {
-    Swiper,
-    SwiperSlide,
+    swiper,
+    swiperSlide,
   },
   props: ["swiper"],
   setup() {
     return {
-      modules: [Pagination, Autoplay],
+      modules: [pagination, autoplay],
     };
   },
 };
