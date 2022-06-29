@@ -16,4 +16,7 @@ export default defineConfig({
       external: [/^node:.*/],
     },
   },
+  optimizeDeps: {
+    include: ["swiper/vue"],
+  },
 });
