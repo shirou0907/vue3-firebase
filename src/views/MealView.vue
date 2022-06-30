@@ -556,7 +556,7 @@ renderData(route.params.id);
 
 .loading-image {
   height: 160px;
-  background: transparent url("@/assets/img/loading-image.gif") center / cover
+  background: transparent url("/img/loading-image.gif") center / cover
     no-repeat;
 }
 

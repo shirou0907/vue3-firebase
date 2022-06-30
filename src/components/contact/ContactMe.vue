@@ -2,7 +2,7 @@
   <base-fragment>
     <div class="contact-top">
       <div class="contact-top-l"></div>
-      <img src="@/assets/img/meal-top.png" alt="" />
+      <img src="/img/meal-top.png" alt="" />
       <h1>Contact Me</h1>
     </div>
     <div class="wrap-me container">
@@ -77,7 +77,7 @@ import BaseFragment from "@/components/base/BaseFragment.vue";
 }
 
 .contact-top-l {
-  background: url("@/assets/img/meal-bt.png") center / cover no-repeat;
+  background: url("/img/meal-bt.png") center / cover no-repeat;
   position: absolute;
   top: 0;
   left: 0;

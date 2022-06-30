@@ -1,6 +1,6 @@
 <template>
   <div class="app-loading">
-    <img src="@/assets/img/app.gif" alt="" />
+    <img src="/img/app.gif" alt="" />
   </div>
 </template>
 <script>

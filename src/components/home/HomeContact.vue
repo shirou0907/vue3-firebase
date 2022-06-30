@@ -28,11 +28,11 @@
 import BaseWave from "@/components/base/BaseWave.vue";
 import BaseFragment from "@/components/base/BaseFragment.vue";
 import { ref } from "vue";
-import { pagination, autoplay } from "Swiper";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+import { Pagination, Autoplay } from "Swiper";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-const modules = [pagination, autoplay];
+const modules = [Pagination, Autoplay];
 const meals = ref([
   {
     name: "Banana Pancakes",

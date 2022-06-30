@@ -39,7 +39,7 @@ const rating = ref([
 <style scoped>
 .wrap-fragment {
   height: 100vh;
-  background: url("@/assets/img/home-review.jpg") center / cover no-repeat;
+  background: url("/img/home-review.jpg") center / cover no-repeat;
 }
 
 .wrap-review {

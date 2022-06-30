@@ -32,7 +32,7 @@ route.params.id ? "" : router.push("/menu/beef");
   min-height: 100vh;
   text-shadow: 0 1px #000;
   color: #fff;
-  background: url("@/assets/img/header-bg.jpg") center / cover no-repeat;
+  background: url("/img/header-bg.jpg") center / cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;

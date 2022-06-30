@@ -2,7 +2,7 @@
   <BaseFragment img="home-story">
     <div class="row">
       <img
-        src="@/assets/img/spices-left.png"
+        src="/img/spices-left.png"
         alt=""
         class="story-left col col-md-3"
       />
@@ -21,7 +21,7 @@
         </div>
       </div>
       <img
-        src="@/assets/img/spices-right.png"
+        src="/img/spices-right.png"
         alt=""
         class="story-right col col-md-3"
       />
@@ -33,7 +33,7 @@ import BaseFragment from "@/components/base/BaseFragment.vue";
 </script>
 <style scoped>
 .wrap-fragment {
-  background: url("@/assets/img/home-story.jpg") center / cover no-repeat;
+  background: url("public/img/home-story.jpg") center / cover no-repeat;
   padding: 40px 120px;
 }
 
@@ -50,7 +50,7 @@ import BaseFragment from "@/components/base/BaseFragment.vue";
   padding: 20px 40px;
   height: 100%;
   border: 18px solid rgb(8, 17, 68);
-  background: url("@/assets/img/menu.png") center / contain no-repeat;
+  background: url("/img/menu.png") center / contain no-repeat;
 }
 .story-title {
   font-size: 60px;

@@ -1,12 +1,8 @@
 <template>
   <div class="wrap-footer">
     <div class="footer-top">
-      <img src="@/assets/img/footer-left.png" class="footer-img-left" alt="" />
-      <img
-        src="@/assets/img/footer-right.png"
-        class="footer-img-right"
-        alt=""
-      />
+      <img src="/img/footer-left.png" class="footer-img-left" alt="" />
+      <img src="/img/footer-right.png" class="footer-img-right" alt="" />
     </div>
     <div class="footer">
       <div class="footer-body">
@@ -84,7 +80,7 @@ const text = ref("Subscribe to our newsletter");
 </script>
 <style scoped>
 .wrap-footer {
-  background: url("@/assets/img/meal-bg.jpg") center / cover no-repeat;
+  background: url("/img/meal-bg.jpg") center / cover no-repeat;
 }
 
 .footer {

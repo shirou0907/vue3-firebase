@@ -41,7 +41,7 @@ export default {
 <style scoped lang="scss">
 .wrap-fragment {
   padding: 200px 40px;
-  background: url("@/assets/img/user-profile-bg.jpg") center / cover no-repeat;
+  background: url("/img/user-profile-bg.jpg") center / cover no-repeat;
   .user-option {
     padding: 20px 40px;
     background-color: #fff;

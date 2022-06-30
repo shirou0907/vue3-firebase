@@ -46,7 +46,7 @@
                   }"
                   ><img
                     width="60"
-                    :src="`/src/assets/img/flag/${flag.flag}.svg`"
+                    :src="`/img/flag/${flag.flag}.svg`"
                     alt=""
                   />
                   <p>{{ flag.name }}</p>
@@ -97,7 +97,7 @@ const list = computed(() => {
 
 <style scoped>
 .wolrd-cousine {
-  background: url("@/assets/img/world.jpg") center / cover no-repeat;
+  background: url("/img/world.jpg") center / cover no-repeat;
   padding: 40px 120px;
 }
 

@@ -12,7 +12,7 @@
 // const logo = ref("");
 // watchEffect(async () => {
 //   logo.value = (
-//     await import(/* @vite-ignore */ `@/assets/img/${img.img}.jpg`)
+//     await import(/* @vite-ignore */ `public/img/${img.img}.jpg`)
 //   ).default;
 // });
 </script>

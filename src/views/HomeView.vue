@@ -15,7 +15,7 @@ const { x, y } = checkPosition();
         <div class="home-intro-p">Discovery</div>
 
         <!-- <div class="home-intro-cook">
-          <img src="@/assets/img/dinner.png" alt="" />
+          <img src="/img/dinner.png" alt="" />
         </div> -->
         <div class="home-intro-title">
           If you are a chef, no matter how good a chef you are, it's not good
@@ -24,11 +24,11 @@ const { x, y } = checkPosition();
         <div class="home-intro-title">{{ x }} x {{ y }}</div>
       </div>
       <div class="home-img">
-        <img class="home-img-left" src="@/assets/img/home-left.png" alt="" />
-        <img class="home-img-right" src="@/assets/img/home-right.png" alt="" />
+        <img class="home-img-left" src="/img/home-left.png" alt="" />
+        <img class="home-img-right" src="/img/home-right.png" alt="" />
         <!-- <img
           class="home-img-bottom"
-          src="@/assets/img/home-bottom.png"
+          src="/img/home-bottom.png"
           alt=""
         /> -->
       </div>
@@ -44,7 +44,7 @@ const { x, y } = checkPosition();
 
 <style scoped>
 .home-layer {
-  background: url("@/assets/img/homez.jpg") center / cover no-repeat;
+  background: url("/img/homez.jpg") center / cover no-repeat;
   height: 100vh;
 }
 

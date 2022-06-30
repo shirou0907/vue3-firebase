@@ -14,7 +14,7 @@
         >
           <div class="row">
             <div class="catering-image col col-md-6 col-sm-12">
-              <img :src="`src/assets/img/${data.img}.jpg`" alt="" />
+              <img :src="`/img/${data.img}.jpg`" alt="" />
             </div>
             <div class="catering-intro col col-md-6 col-sm-12">
               <div class="catering-p">Catering</div>
@@ -38,11 +38,11 @@
 <script setup>
 import BaseFragment from "@/components/base/BaseFragment.vue";
 import { ref } from "vue";
-import { pagination, autoplay } from "Swiper";
-import { swiper, swiperSlide } from "vue-awesome-swiper";
+import { Pagination, Autoplay } from "Swiper";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css";
 import "swiper/css/pagination";
-const modules = [pagination, autoplay];
+const modules = [Pagination, Autoplay];
 const datas = ref([
   {
     title: "Special events",
