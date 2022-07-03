@@ -37,7 +37,7 @@
                   Red, White & Blue Fruit Salad with Honey-Lime Dressing
                 </div>
               </div>
-              <img src="img/r3.jpg" alt="" />
+              <img src="/img/r3.jpg" alt="" />
             </div>
           </div>
           <div class="c">
@@ -48,7 +48,7 @@
                   Watermelon & Blackberry Granita with Rum & Mint
                 </div>
               </div>
-              <img src="img/r4.jpg" alt="" />
+              <img src="/img/r4.jpg" alt="" />
             </div>
           </div>
         </div>
