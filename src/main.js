@@ -3,12 +3,6 @@ import App from "./App.vue";
 
 const app = createApp(App);
 
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fas } from "@fortawesome/free-solid-svg-icons";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import { far } from "@fortawesome/free-regular-svg-icons";
-library.add(fas, far, fab);
-
 // import { clickOutside } from "@/until/directives";
 // app.directive("click-outside", clickOutside);
 
@@ -30,6 +24,12 @@ app.use(VueLazyload, {
     threshold: 0.1,
   },
 });
+
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fas } from "@fortawesome/free-solid-svg-icons";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+// import { far } from "@fortawesome/free-regular-svg-icons";
+library.add(fas, fab);
 
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 app.component("font-awesome-icon", FontAwesomeIcon);

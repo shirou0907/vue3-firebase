@@ -18,7 +18,7 @@ const checkWidth = () => {
   }
 };
 
-console.log(checkWidth());
+// console.log(checkWidth());
 </script>
 
 <template>

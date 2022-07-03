@@ -17,11 +17,11 @@
         </div>
         <div class="body-contact">
           <div class="body-address">
-            22 Royal Street, Sundance Avenue, New York
+            tungpt244@gmail.com
           </div>
           <div class="body-work">
             RESERVATIONS NUMBER:
-            <p>+00 25 854 78521</p>
+            <p>+84 379 000 135</p>
           </div>
           <div class="body-work">
             WORKING HOURS:

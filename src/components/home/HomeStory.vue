@@ -33,7 +33,7 @@ import BaseFragment from "@/components/base/BaseFragment.vue";
 </script>
 <style scoped>
 .wrap-fragment {
-  background: url("public/img/home-story.jpg") center / cover no-repeat;
+  background: url("/img/home-story.jpg") center / cover no-repeat;
   padding: 40px 120px;
 }
 

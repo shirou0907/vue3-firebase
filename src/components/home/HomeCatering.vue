@@ -1,5 +1,5 @@
 <template>
-  <BaseFragment class="container">
+  <BaseFragment>
     <div class="catering">
       <swiper
         class="swiper"

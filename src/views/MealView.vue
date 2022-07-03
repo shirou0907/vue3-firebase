@@ -77,12 +77,7 @@
               class="menu-item"
             >
               <div class="wrap-image">
-                <img
-                  :src="item.strMealThumb"
-                  @load="imgLoaded = true"
-                  :class="[imgLoaded ? 'loading-image' : '']"
-                  v-show="imgLoaded"
-                />
+                <img v-lazy="item.strMealThumb" />
                 <div class="item-title">
                   <p>{{ item.strMeal }}</p>
                 </div>
@@ -156,7 +151,7 @@
           <div class="review-header">
             <div class="review-name">
               <div class="review-info">
-                <img :src="data.photo" alt="" width="32" />
+                <img v-lazy="data.photo" alt="" width="32" />
                 {{ data.name }}
               </div>
               <div class="rating-btn">
@@ -211,9 +206,12 @@ const seeMore = ref(false);
 
 //Check when id meal change
 const route = useRoute();
+
 const store = useStore();
 watch(route, async (newRoute) => {
-  await renderData(newRoute.params.id);
+  newRoute.params.id
+    ? (await renderData(newRoute.params.id), (seeMore.value = false))
+    : null;
 });
 
 //Get info User Logged in
@@ -253,7 +251,7 @@ const getMeal = async (id) => {
 //Get list meal by random
 const i = ref("lemon");
 const list = ref([]);
-const imgLoaded = ref("false");
+// const imgLoaded = ref("false");
 const getList = async () => {
   try {
     const res = await axios.get(
@@ -326,10 +324,10 @@ const checkComment = computed(() => {
 
 //Render all data meal
 const renderData = async (id) => {
-  await getMeal(id);
-  await getList();
-  await getComment();
-  // await Promise.all([getMeal(id), getList(), getComment()]);
+  // await getMeal(id);
+  // await getList();
+  // await getComment();
+  await Promise.all([getMeal(id), getList(), getComment()]);
 };
 
 renderData(route.params.id);
@@ -556,8 +554,7 @@ renderData(route.params.id);
 
 .loading-image {
   height: 160px;
-  background: transparent url("/img/loading-image.gif") center / cover
-    no-repeat;
+  background: transparent url("/img/loading-image.gif") center / cover no-repeat;
 }
 
 .meal-feeling {
@@ -607,7 +604,6 @@ renderData(route.params.id);
 }
 
 .review-list {
-  
 }
 
 .review-item {

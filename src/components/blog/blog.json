@@ -1,33 +1,6 @@
-<template>
-  <div class="wrap-tab">
-    <slot></slot>
-    <div class="tab-description">
-      <p v-for="(des, i) in listData" :key="i">
-        <div v-if="des.id == tabs.id">
-          <div class="tab-item" v-for="(t, i) in des.data" :key="i">
-            <div class="item-title"><h2>{{t.name}}</h2></div>
-            <div class="item-description" v-for="(d, i) in t.description" :key="i">
-              <p>{{d}}</p>
-            </div>
-          </div>
-        </div>
-      </p>
-    </div>
-    <!-- {{ tabs }} -->
-  </div>
-</template>
-<script lang="ts" setup>
-import { ref, PropType } from "vue";
-import type { Ref } from "vue";
-
-interface Tabs {
-  title: string;
-  id: number;
-}
-
-const listData = [
+[
   {
-    "id": 0,
+    "id": "0",
     "data": [
       {
         "name": "Overnight oats",
@@ -56,7 +29,7 @@ const listData = [
     ]
   },
   {
-    "id": 1,
+    "id": "1",
     "data": [
       {
         "name": "Italian pasta salad",
@@ -85,7 +58,7 @@ const listData = [
     ]
   },
   {
-    "id": 2,
+    "id": "2",
     "data": [
       {
         "name": "Fridge/freezer stir-fry",
@@ -114,26 +87,3 @@ const listData = [
     ]
   }
 ]
-
-
-defineProps({
-  tabs: Object as PropType<Tabs>,
-});
-
-const test: Ref<string> = ref("test");
-</script>
-<style scoped>
-.wrap-tab {
-  padding: 20px;
-}
-
-.item-title {
-  font-family: var(--main-font);
-  margin-bottom: 20px;
-}
-
-.item-description {
-  font-style: italic;
-  font-size: 14px;
-}
-</style>
