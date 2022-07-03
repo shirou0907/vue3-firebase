@@ -42,12 +42,7 @@
             class="menu-item"
           >
             <div class="wrap-image">
-              <img
-                :src="item.strMealThumb"
-                @load="imgLoaded = true"
-                :class="[imgLoaded ? 'loading-image' : '']"
-                v-show="imgLoaded"
-              />
+              <img v-lazy="item.strMealThumb" />
             </div>
             <div class="item-title">
               <p>{{ item.strMeal }}</p>
@@ -98,7 +93,10 @@ watch(route, (newRoute) => {
 
 const list = ref([]);
 // const isLike = ref("false");
-const imgLoaded = ref("false");
+// const imgLoaded = ref("false");
+    // @load="imgLoaded = true"
+    // :class="[imgLoaded ? 'loading-image' : '']"
+    // v-show="imgLoaded"
 const isLoading = ref(false);
 const mealKey = ref("");
 const fil = computed(() => {
@@ -298,8 +296,7 @@ const unlike = async (id) => {
 
 .loading-image {
   height: 160px;
-  background: transparent url("/img/loading-image.gif") center / cover
-    no-repeat;
+  background: transparent url("/img/loading-image.gif") center / cover no-repeat;
 }
 .like-test {
   position: absolute;

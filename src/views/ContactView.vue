@@ -2,7 +2,7 @@
   <div class="wrap-contact">
     <div class="video-trailer">
       <video loop autoplay muted>
-        <source src="@/assets/video/cooking.mp4" type="video/mp4" />
+        <source src="/video/cooking.mp4" type="video/mp4" />
       </video>
       <div class="video-title name-title">We'd Love to Hear From You</div>
     </div>

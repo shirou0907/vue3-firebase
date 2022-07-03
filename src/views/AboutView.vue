@@ -44,11 +44,7 @@
                     name: 'menu-country',
                     params: { id: flag.name.toLowerCase() },
                   }"
-                  ><img
-                    width="60"
-                    :src="`/img/flag/${flag.flag}.svg`"
-                    alt=""
-                  />
+                  ><img width="60" v-lazy="`/img/flag/${flag.flag}.svg`" alt="" />
                   <p>{{ flag.name }}</p>
                 </router-link>
               </div>

@@ -2,7 +2,7 @@
 import BaseHeader from "@/components/header/BaseHeader.vue";
 import MainHeader from "@/components/header/MainHeader.vue";
 import BaseFooter from "@/components/footer/BaseFooter.vue";
-import { checkPosition } from "@/composable/checkScroll.js";
+import { checkPosition } from "@/composable/checkScroll";
 import { useRoute } from "vue-router";
 const route = useRoute();
 const { position } = checkPosition();
@@ -56,7 +56,7 @@ console.log(checkWidth());
 }
 
 #not-support {
-  background: url("https://store.gs25.com.vn/images/notsupportmb.png") center / cover no-repeat;
+  background: url("/img/nsm.png") center / cover no-repeat;
   height: 100vh;
 }
 

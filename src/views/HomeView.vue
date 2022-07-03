@@ -1,10 +1,10 @@
 <script setup>
 import HomeStory from "../components/home/HomeStory.vue";
 import HomeReview from "../components/home/HomeReview.vue";
-import HomeCatering from "../components/home/HomeCatering.vue";
 import HomeContact from "../components/home/HomeContact.vue";
+import ContactMe from "../components/contact/ContactMe.vue";
 // import HomeSilde from "../components/home/HomeSilde.vue";
-import { checkPosition } from "@/composable/checkScroll.js";
+import { checkPosition } from "@/composable/checkScroll";
 const { x, y } = checkPosition();
 </script>
 
@@ -33,12 +33,10 @@ const { x, y } = checkPosition();
         /> -->
       </div>
     </div>
-
     <HomeStory />
     <HomeContact />
-    <!-- <HomeSilde /> -->
-    <HomeCatering />
     <HomeReview />
+    <ContactMe />
   </div>
 </template>
 

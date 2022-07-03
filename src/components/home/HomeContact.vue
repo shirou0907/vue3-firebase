@@ -4,9 +4,10 @@
     <base-wave class="wrap-wave"></base-wave>
     <swiper
       class="swiper"
+      :pagination="{ clickable: true }"
       :modules="modules"
       :loop="true"
-      :space-between="6"
+      :space-between="30"
       :slides-per-view="5"
       :autoplay="{ delay: 3500, disableOnInteraction: false }"
     >
@@ -139,9 +140,8 @@ const meals = ref([
 <style scoped>
 .meal-title {
   position: absolute;
-  top: 30px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 60px;
+  left: 30px;
   z-index: 1;
   font-size: 42px;
   color: #fff;
@@ -162,7 +162,7 @@ const meals = ref([
 
 .meal-img {
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
 .meal-img img {

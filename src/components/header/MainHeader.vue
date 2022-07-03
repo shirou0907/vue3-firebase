@@ -2,14 +2,15 @@
   <div class="wrap-header">
     <div class="header">
       <div class="header-logo">
-        <a href="/"
+        <router-link to="/"
           ><img
             alt="Vue logo"
             class="logo"
             src="@/assets/logo.svg"
             width="40"
             height="40"
-        /></a>
+          />
+        </router-link>
         <div class="header-search">
           <div class="header-link-item" @click="openSearch = !openSearch">
             <font-awesome-icon

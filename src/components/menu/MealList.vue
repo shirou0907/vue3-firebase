@@ -43,10 +43,7 @@
           >
             <div class="wrap-image">
               <img
-                :src="item.strMealThumb"
-                @load="imgLoaded = true"
-                :class="[imgLoaded ? 'loading-image' : '']"
-                v-show="imgLoaded"
+                v-lazy="item.strMealThumb"
               />
             </div>
             <div class="item-title">
@@ -92,7 +89,7 @@ import { getOneDoc, updateArray } from "@/repository/firestore";
 const id = ref("beef");
 const list = ref([]);
 // const isLike = ref("false");
-const imgLoaded = ref("false");
+// const imgLoaded = ref("false");
 const isLoading = ref(false);
 const mealKey = ref("");
 const fil = computed(() => {

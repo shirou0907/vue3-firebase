@@ -76,3 +76,11 @@ body {
 .base-leave-to {
   transform: translateY(-100%);
 }
+
+.swiper {
+  padding: 40px 0 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #fcda9a !important;
+}

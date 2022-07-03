@@ -12,6 +12,25 @@ library.add(fas, far, fab);
 // import { clickOutside } from "@/until/directives";
 // app.directive("click-outside", clickOutside);
 
+//Lazy loading images
+const loadimage = new URL("/img/loading-image.gif", import.meta.url).href;
+const errorimage = new URL("/img/loading-image.gif", import.meta.url).href;
+import VueLazyload from "vue-lazyload";
+app.use(VueLazyload, {
+  preLoad: 1.3,
+  error: errorimage,
+  loading: loadimage,
+  attempt: 1,
+  // set observer to true
+  observer: true,
+
+  // optional
+  observerOptions: {
+    rootMargin: "0px",
+    threshold: 0.1,
+  },
+});
+
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 app.component("font-awesome-icon", FontAwesomeIcon);
 
