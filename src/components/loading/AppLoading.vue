@@ -3,7 +3,7 @@
     <img src="/img/app.gif" alt="" />
   </div>
 </template>
-<script>
+<script lang="ts">
 export default {};
 </script>
 <style scoped lang="scss">

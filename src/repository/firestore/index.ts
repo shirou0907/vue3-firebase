@@ -10,7 +10,7 @@ import {
 } from "@firebase/firestore";
 import { db } from "@/firebase/config.js";
 
-export async function getData(document) {
+export async function getData(document: string) {
   const querySnapshot = await getDocs(collection(db, document));
   const data = querySnapshot.docs.map((doc) => {
     return { ...doc.data(), id: doc.id };
@@ -18,7 +18,7 @@ export async function getData(document) {
   return data;
 }
 
-export async function getOneDoc(collection, id) {
+export async function getOneDoc(collection: string, id: string) {
   const docRef = doc(db, collection, id);
   const docSnap = await getDoc(docRef);
 
@@ -31,7 +31,7 @@ export async function getOneDoc(collection, id) {
   }
 }
 
-export async function addNewDoc(document, data) {
+export async function addNewDoc(document: string, data: any) {
   try {
     await addDoc(collection(db, document), data);
   } catch (error) {
@@ -39,7 +39,7 @@ export async function addNewDoc(document, data) {
   }
 }
 
-export async function createOrUpdate(document, data, id) {
+export async function createOrUpdate(document: string, data: any, id: string) {
   try {
     const cityRef = doc(db, document, id);
     await setDoc(cityRef, data, { merge: true });
@@ -48,7 +48,7 @@ export async function createOrUpdate(document, data, id) {
   }
 }
 
-export async function updateData(document, data, id) {
+export async function updateData(document: string, data: any, id: string) {
   try {
     const ref = doc(db, document, id);
     await updateDoc(ref, data);
@@ -58,7 +58,7 @@ export async function updateData(document, data, id) {
 }
 
 export function updateArray() {
-  const updateComment = async (document, data, id) => {
+  const updateComment = async (document: string, data: any, id: string) => {
     try {
       const ref = doc(db, document, id);
       await updateDoc(ref, {
@@ -69,7 +69,7 @@ export function updateArray() {
     }
   };
 
-  const like = async (document, data, id) => {
+  const like = async (document: string, data: any, id: string) => {
     try {
       const ref = doc(db, document, id);
       await updateDoc(ref, {
@@ -80,7 +80,7 @@ export function updateArray() {
     }
   };
 
-  const unLike = async (document, data, id) => {
+  const unLike = async (document: string, data: any, id: string) => {
     try {
       const ref = doc(db, document, id);
       await updateDoc(ref, {

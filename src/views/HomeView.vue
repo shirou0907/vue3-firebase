@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import HomeStory from "../components/home/HomeStory.vue";
 import HomeReview from "../components/home/HomeReview.vue";
 import HomeContact from "../components/home/HomeContact.vue";

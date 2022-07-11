@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import BaseHeader from "@/components/header/BaseHeader.vue";
 import MainHeader from "@/components/header/MainHeader.vue";
 import BaseFooter from "@/components/footer/BaseFooter.vue";

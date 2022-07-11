@@ -56,7 +56,7 @@
     </div>
   </base-fragment>
 </template>
-<script setup>
+<script setup lang="ts">
 import BaseFragment from "@/components/base/BaseFragment.vue";
 </script>
 <style scoped>

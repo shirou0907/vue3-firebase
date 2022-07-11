@@ -27,12 +27,13 @@
     <div class="wrap-modal" @click="$emit('closeTab')"></div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from "vue";
 import axios from "axios";
+import type { Meal } from "@/interface";
 
 const key = ref("");
-const meals = ref([]);
+const meals = ref<Meal[]>([]);
 const currentLoad = ref(6);
 const message = ref("");
 const isLoading = ref(false);

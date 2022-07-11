@@ -92,7 +92,7 @@
     </transition>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import SearchMeal from "@/components/sidebar/SearchMeal.vue";
 import { useStore } from "vuex";
 import { computed, ref } from "vue";

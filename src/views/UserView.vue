@@ -25,7 +25,7 @@
     </div>
   </base-fragment>
 </template>
-<script>
+<script lang="ts">
 import BaseFragment from "@/components/base/BaseFragment.vue";
 export default {
   components: {

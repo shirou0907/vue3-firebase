@@ -44,7 +44,11 @@
                     name: 'menu-country',
                     params: { id: flag.name.toLowerCase() },
                   }"
-                  ><img width="60" v-lazy="`/img/flag/${flag.flag}.svg`" alt="" />
+                  ><img
+                    width="60"
+                    v-lazy="`/img/flag/${flag.flag}.svg`"
+                    alt=""
+                  />
                   <p>{{ flag.name }}</p>
                 </router-link>
               </div>
@@ -58,10 +62,10 @@
   ></base-fragment>
 </template>
 
-<script setup>
+<script setup lang="ts">
 // import { checkPosition } from "@/composable/checkScroll.js";
 import BaseFragment from "@/components/base/BaseFragment.vue";
-import flags from "@/composable/nationalFlag.js";
+import flags from "@/composable/nationalFlag";
 import { ref, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 

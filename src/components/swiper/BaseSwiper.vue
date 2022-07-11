@@ -14,13 +14,14 @@
   </swiper>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from "vue";
 import { Pagination, Autoplay } from "Swiper";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 
-export default {
+export default defineComponent({
   components: {
     Swiper,
     SwiperSlide,
@@ -31,7 +32,7 @@ export default {
       modules: [Pagination, Autoplay],
     };
   },
-};
+});
 </script>
 
 <style scoped>

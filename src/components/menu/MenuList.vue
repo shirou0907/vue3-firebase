@@ -20,12 +20,13 @@
     </div>
   </base-fragment>
 </template>
-<script setup>
+<script setup lang="ts">
 import MainLoading from "../loading/MainLoading.vue";
 import BaseFragment from "../base/BaseFragment.vue";
 import { ref, onMounted } from "vue";
 import axios from "axios";
-const list = ref([]);
+import type { Meal } from "@/interface";
+const list = ref<Meal[]>([]);
 const isLoading = ref(false);
 onMounted(() => {
   getListCategory();
@@ -38,7 +39,7 @@ const getListCategory = async () => {
     );
     res ? (list.value = res.data.categories) : (list.value = []);
   } catch (error) {
-    console.log(error.message);
+    console.log((error as Error).message);
   } finally {
     isLoading.value = false;
   }

@@ -30,7 +30,7 @@
     </base-fragment>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 // import AppLoading from "@/components/loading/AppLoading.vue";
 import BaseFragment from "@/components/base/BaseFragment.vue";
 import ContactMe from "@/components/contact/ContactMe.vue";

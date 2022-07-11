@@ -1,13 +1,14 @@
 import { ref, watch } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
-export default function getListMeal(type) {
-  const list = ref([]);
+import type { Meal } from "@/interface";
+export default function getListMeal(type: string) {
+  const list = ref<Meal[]>([]);
   const isLoading = ref(false);
   const id = ref("beef");
   const route = useRoute();
   watch(route, (newRoute) => {
-    id.value = newRoute.params.id;
+    id.value = newRoute.params.id as string;
     getList();
   });
   const getList = async () => {
@@ -18,7 +19,7 @@ export default function getListMeal(type) {
       );
       res ? (list.value = res.data.meals) : (list.value = []);
     } catch (error) {
-      console.log(error.message);
+      console.log((error as Error).message);
     } finally {
       isLoading.value = false;
     }

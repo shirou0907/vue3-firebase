@@ -51,9 +51,7 @@
     </div>
   </div>
 </template>
-<script>
-export default {};
-</script>
+<script setup lang="ts"></script>
 <style scoped>
 .header {
   position: relative;

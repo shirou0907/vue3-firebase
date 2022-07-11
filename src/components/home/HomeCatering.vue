@@ -35,7 +35,7 @@
     </div>
   </BaseFragment>
 </template>
-<script setup>
+<script setup lang="ts">
 import BaseFragment from "@/components/base/BaseFragment.vue";
 import { ref } from "vue";
 import { Pagination, Autoplay } from "Swiper";
@@ -43,7 +43,15 @@ import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css";
 import "swiper/css/pagination";
 const modules = [Pagination, Autoplay];
-const datas = ref([
+
+interface CateringData {
+  img: string;
+  title: string;
+  type: string[];
+  description: string;
+}
+
+const datas = ref<CateringData[]>([
   {
     title: "Special events",
     type: ["Weddings", "Anniversaires", "Baby showers"],

@@ -84,7 +84,7 @@
     <div class="modal" v-if="isLoading"></div>
   </base-fragment>
 </template>
-<script setup>
+<script setup lang="ts">
 import MainLoading from "@/components/loading/MainLoading.vue";
 import MainNotification from "@/components/popup/MainNotification.vue";
 import BaseWave from "@/components/base/BaseWave.vue";
@@ -104,7 +104,7 @@ const message = computed(() => {
   return { value: store.getters.getMessage, type: store.getters.getType };
 });
 
-const register = async () => {
+const register = async (): Promise<void> => {
   isLoading.value = true;
   await store.dispatch("createUser", {
     email: email.value,

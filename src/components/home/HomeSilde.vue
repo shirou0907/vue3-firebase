@@ -18,7 +18,7 @@
     </swiper></base-fragment
   >
 </template>
-<script setup>
+<script setup lang="ts">
 import BaseFragment from "@/components/base/BaseFragment.vue";
 import { ref } from "vue";
 import { Pagination, Autoplay } from "Swiper";

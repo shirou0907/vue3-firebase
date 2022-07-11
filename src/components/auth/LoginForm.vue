@@ -82,7 +82,7 @@
     <div class="modal" v-if="isLoading"></div>
   </base-fragment>
 </template>
-<script setup>
+<script setup lang="ts">
 import MainLoading from "@/components/loading/MainLoading.vue";
 import MainNotification from "@/components/popup/MainNotification.vue";
 import BaseWave from "@/components/base/BaseWave.vue";
@@ -92,16 +92,16 @@ import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 const store = useStore();
 const router = useRouter();
-const isLoading = ref(false);
+const isLoading = ref<boolean>(false);
 const email = ref("");
 const password = ref("");
 const message = computed(() => {
   return { value: store.getters.getMessage, type: store.getters.getType };
 });
 const show = ref(false);
-const type = ref("true");
+const type = ref(true);
 
-const loginWithEmail = async () => {
+const loginWithEmail = async (): Promise<void> => {
   isLoading.value = true;
   await store.dispatch("loginWithEmail", {
     email: email.value,
@@ -115,7 +115,7 @@ const loginWithEmail = async () => {
   }, 2500);
 };
 
-const loginWithGoogle = async () => {
+const loginWithGoogle = async (): Promise<void> => {
   isLoading.value = true;
   try {
     await store.dispatch("loginWithGoogle");
@@ -132,7 +132,7 @@ const loginWithGoogle = async () => {
   }
 };
 
-const loginWithFacebook = async () => {
+const loginWithFacebook = async (): Promise<void> => {
   isLoading.value = true;
   try {
     await store.dispatch("loginWithFaceBook");

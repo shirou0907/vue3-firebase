@@ -6,7 +6,7 @@
       <div class="blog-title">What we should eat for a healthy life</div>
       <div class="row">
         <div class="col col-md-6">
-          <blog-tab :tabs="data">
+          <blog-tab v-bind="data">
             <div class="blog-tab">
               <div
                 class="tab-item"
@@ -31,7 +31,7 @@
     <home-review></home-review>
   </base-fragment>
 </template>
-<script setup>
+<script setup lang="ts">
 import BlogTab from "@/components/blog/BlogTab.vue";
 import HomeCatering from "@/components/home/HomeCatering.vue";
 import HomeReview from "@/components/home/HomeReview.vue";
@@ -43,7 +43,7 @@ const data = ref({
   id: 0,
 });
 
-const tabActive = (index) => {
+const tabActive = (index: number) => {
   data.value.id = index;
 };
 

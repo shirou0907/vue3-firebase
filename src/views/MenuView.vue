@@ -17,7 +17,7 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import MenuList from "../components/menu/MenuList.vue";
 import { useRoute, useRouter } from "vue-router";
 const route = useRoute();

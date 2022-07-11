@@ -80,7 +80,7 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { useStore } from "vuex";
 import { ref, computed } from "vue";
 const store = useStore();

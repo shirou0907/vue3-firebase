@@ -25,7 +25,7 @@
     </swiper>
   </base-fragment>
 </template>
-<script setup>
+<script setup lang="ts">
 import BaseWave from "@/components/base/BaseWave.vue";
 import BaseFragment from "@/components/base/BaseFragment.vue";
 import { ref } from "vue";

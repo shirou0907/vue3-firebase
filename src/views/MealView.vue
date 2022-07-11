@@ -189,9 +189,10 @@
     </div>
   </base-fragment>
 </template>
-<script setup>
+<script setup lang="ts">
 import AppLoading from "@/components/loading/AppLoading.vue";
 import BaseFragment from "@/components/base/BaseFragment.vue";
+import type { Meal, Comment } from "@/interface";
 import { ref, computed, watch } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
@@ -210,7 +211,7 @@ const route = useRoute();
 const store = useStore();
 watch(route, async (newRoute) => {
   newRoute.params.id
-    ? (await renderData(newRoute.params.id), (seeMore.value = false))
+    ? (await renderData(newRoute.params.id as string), (seeMore.value = false))
     : null;
 });
 
@@ -219,21 +220,32 @@ const user = computed(() => store.getters.getUser);
 const isLogin = computed(() => store.getters.getStatus);
 
 //Get Meal By Id
+
 const isLoading = ref(false);
-const meal = ref("");
-const getMeal = async (id) => {
+const meal = ref<Meal | any>({
+  idMeal: "",
+  strMeal: "",
+  strMealThumb: "",
+  strCategory: "",
+  strArea: "",
+  strInstructions: [""],
+  strYoutube: "",
+});
+const getMeal = async (id: string): Promise<void> => {
   isLoading.value = true;
-  await createOrUpdate("products", { active: true }, route.params.id);
+  await createOrUpdate("products", { active: true }, route.params.id as string);
   const res = await axios.get(
     `${import.meta.env.VITE_APP_API_URL}/lookup.php?i=${id}`
   );
   if (res.data.meals) meal.value = res.data.meals[0];
-  meal.value.strInstructions = meal.value.strInstructions.split(".");
+  meal.value.strInstructions = (meal.value.strInstructions as string).split(
+    "."
+  );
   meal.value.strYoutube
     ? (meal.value.strYoutube = meal.value.strYoutube
         .split("/")[3]
         .substring(8, 19))
-    : (meal.value.strYoutube = null);
+    : console.log("no youtube");
   const spice = [];
   for (let i = 1; i <= 20; i++) {
     if (meal.value[`strIngredient${i}`])
@@ -244,22 +256,22 @@ const getMeal = async (id) => {
   }
   const random = Math.floor(Math.random() * spice.length);
   i.value = spice[random].name;
-  meal.value = { ...meal.value, spice };
+  meal.value = { ...meal.value, ...spice };
   isLoading.value = false;
 };
 
 //Get list meal by random
 const i = ref("lemon");
-const list = ref([]);
+const list = ref<Meal[]>([]);
 // const imgLoaded = ref("false");
-const getList = async () => {
+const getList = async (): Promise<void> => {
   try {
     const res = await axios.get(
       `${import.meta.env.VITE_APP_API_URL}/filter.php?i=${i.value}`
     );
     res ? (list.value = res.data.meals.reverse()) : (list.value = []);
   } catch (error) {
-    console.log(error.message);
+    console.log((error as Error).message);
   } finally {
     isLoading.value = false;
   }
@@ -267,16 +279,19 @@ const getList = async () => {
 
 //Get All Comment
 const isLoadingComment = ref(false);
-const review = ref([]);
-const comment = ref({ message: null, rate: 0, uid: null, updateAt: null });
-const getComment = async () => {
+const review = ref<Comment[]>([]);
+const comment = ref<Comment>({ message: "", rate: 0, uid: "", updateAt: 0 });
+const getComment = async (): Promise<void> => {
   isLoadingComment.value = true;
   try {
-    const { result } = await getOneDoc("products", route.params.id);
+    const { result }: any = await getOneDoc(
+      "products",
+      route.params.id as string
+    );
     if (result.comments) {
-      result.comments.forEach(async (data, index, arr) => {
+      result.comments.forEach(async (data: any, index: string, arr: any) => {
         try {
-          const info = await getOneDoc("users", data.uid);
+          const info: any = await getOneDoc("users", data.uid);
           const { name, photo } = info.result;
           return (arr[index] = { ...data, name, photo });
         } catch (error) {
@@ -297,7 +312,7 @@ const getComment = async () => {
 };
 
 //Send Comment
-const sendComment = async () => {
+const sendComment = async (): Promise<void> => {
   if (comment.value.message && comment.value.rate) {
     const currenttime = +new Date();
     if (comment.value != null) {
@@ -306,10 +321,10 @@ const sendComment = async () => {
       await updateArray().updateComment(
         "products",
         comment.value,
-        route.params.id
+        route.params.id as string
       );
       await getComment();
-      comment.value = { message: null, rate: 0, uid: null, updateAt: null };
+      comment.value = { message: "", rate: 0, uid: "", updateAt: 0 };
     }
   } else {
     alert("Please enter your comment");
@@ -323,14 +338,14 @@ const checkComment = computed(() => {
 });
 
 //Render all data meal
-const renderData = async (id) => {
-  // await getMeal(id);
-  // await getList();
-  // await getComment();
-  await Promise.all([getMeal(id), getList(), getComment()]);
+const renderData = async (id: string): Promise<void> => {
+  await getMeal(id);
+  await getList();
+  await getComment();
+  // await Promise.all([getMeal(id), getList(), getComment()]);
 };
 
-renderData(route.params.id);
+renderData(route.params.id as string);
 </script>
 <style scoped>
 .rate-icon {

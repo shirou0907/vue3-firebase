@@ -8,7 +8,7 @@
     </div>
   </BaseFragment>
 </template>
-<script setup>
+<script setup lang="ts">
 import BaseFragment from "@/components/base/BaseFragment.vue";
 import BaseSwiper from "@/components/swiper/BaseSwiper.vue";
 import { ref } from "vue";

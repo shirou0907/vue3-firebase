@@ -1,11 +1,7 @@
 <template>
   <BaseFragment img="home-story">
     <div class="row">
-      <img
-        src="/img/spices-left.png"
-        alt=""
-        class="story-left col col-md-3"
-      />
+      <img src="/img/spices-left.png" alt="" class="story-left col col-md-3" />
       <div class="story-thanks col col-md-6 col-sm-12">
         <div class="wrap-thank">
           <div>
@@ -28,7 +24,7 @@
     </div>
   </BaseFragment>
 </template>
-<script setup>
+<script setup lang="ts">
 import BaseFragment from "@/components/base/BaseFragment.vue";
 </script>
 <style scoped>

@@ -42,9 +42,7 @@
             class="menu-item"
           >
             <div class="wrap-image">
-              <img
-                v-lazy="item.strMealThumb"
-              />
+              <img v-lazy="item.strMealThumb" />
             </div>
             <div class="item-title">
               <p>{{ item.strMeal }}</p>
@@ -79,15 +77,16 @@
     </div>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import MainLoading from "@/components/loading/MainLoading.vue";
 import { ref, watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import axios from "axios";
 import { useStore } from "vuex";
 import { getOneDoc, updateArray } from "@/repository/firestore";
+import type { Meal } from "@/interface";
 const id = ref("beef");
-const list = ref([]);
+const list = ref<Meal[]>([]);
 // const isLike = ref("false");
 // const imgLoaded = ref("false");
 const isLoading = ref(false);
@@ -112,7 +111,7 @@ const getList = async () => {
     );
     res ? (list.value = res.data.meals) : (list.value = []);
   } catch (error) {
-    console.log(error.message);
+    console.log((error as Error).message);
   } finally {
     isLoading.value = false;
   }
@@ -123,16 +122,16 @@ getList();
 const store = useStore();
 const user = computed(() => store.getters.getUser);
 //Get status Like / UnLike
-const status = ref([]);
-const listLike = ref([]);
+const status = ref<Array<string>>([]);
+const listLike = ref<Array<string>>([]);
 const getStatus = async () => {
   if (user.value) {
-    const info = await getOneDoc("users", user.value.uid);
+    const info: any = await getOneDoc("users", user.value.uid);
     const { likes } = info.result;
     status.value = likes;
   }
   listLike.value = [];
-  for (let i in status.value) {
+  for (const i in status.value) {
     if (status.value[i]) {
       listLike.value = [...listLike.value, i];
     }
@@ -141,13 +140,13 @@ const getStatus = async () => {
 getStatus();
 
 //Send Like / UnLike
-const like = async (id) => {
+const like = async (id: string) => {
   if (user.value) {
     await updateArray().like("users", id, user.value.uid);
   }
   await getStatus();
 };
-const unlike = async (id) => {
+const unlike = async (id: string) => {
   if (user.value) {
     await updateArray().unLike("users", id, user.value.uid);
   }
@@ -156,7 +155,7 @@ const unlike = async (id) => {
 
 const route = useRoute();
 watch(route, (newRoute) => {
-  id.value = newRoute.params.id;
+  id.value = newRoute.params.id as string;
   getList();
 });
 </script>
@@ -295,8 +294,7 @@ watch(route, (newRoute) => {
 
 .loading-image {
   height: 160px;
-  background: transparent url("/img/loading-image.gif") center / cover
-    no-repeat;
+  background: transparent url("/img/loading-image.gif") center / cover no-repeat;
 }
 .like-test {
   position: absolute;

@@ -4,7 +4,7 @@
     <slot name="title"></slot>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 // import { defineProps } from "vue";
 
 // const img = defineProps(["img"]);

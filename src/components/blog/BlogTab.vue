@@ -2,24 +2,27 @@
   <div class="wrap-tab">
     <slot></slot>
     <div class="tab-description">
-      <p v-for="(des, i) in listData" :key="i">
+      <div v-for="(des, i) in listData" :key="i">
         <div v-if="des.id == tabs.id">
           <div class="tab-item" v-for="(t, i) in des.data" :key="i">
-            <div class="item-title"><h2>{{t.name}}</h2></div>
-            <div class="item-description" v-for="(d, i) in t.description" :key="i">
-              <p>{{d}}</p>
+            <div class="item-title">
+              <h2>{{ t.name }}</h2>
+            </div>
+            <div
+              class="item-description"
+              v-for="(d, i) in t.description"
+              :key="i"
+            >
+              <p>{{ d }}</p>
             </div>
           </div>
         </div>
-      </p>
+      </div>
     </div>
     <!-- {{ tabs }} -->
   </div>
 </template>
 <script lang="ts" setup>
-import { ref, PropType } from "vue";
-import type { Ref } from "vue";
-
 interface Tabs {
   title: string;
   id: number;
@@ -27,100 +30,95 @@ interface Tabs {
 
 const listData = [
   {
-    "id": 0,
-    "data": [
+    id: 0,
+    data: [
       {
-        "name": "Overnight oats",
-        "description": [
+        name: "Overnight oats",
+        description: [
           "Overnight oats are an easy breakfast option that requires no prep time in the morning. Plus, they’re made with basic ingredients that won’t break the bank.",
           "Oats are also a good source of beta glucan fiber, which may help lower your cholesterol levels and reduce your risk of heart disease.",
-          "There are tons of overnight oat recipes on the internet, but I especially like these basic banana overnight oats."
-        ]
+          "There are tons of overnight oat recipes on the internet, but I especially like these basic banana overnight oats.",
+        ],
       },
       {
-        "name": "Loaded avocado toast",
-        "description": [
+        name: "Loaded avocado toast",
+        description: [
           "Avocado toast can be a nutritious breakfast, as avocados are a good source of healthy fats and very filling.",
           "Start with a toasted slice of 100% whole grain, rye, or sourdough bread. In a small bowl, smash together half of an avocado with some lime or lemon juice. Spread this on top of the toast.",
-          "For a protein boost, add one or two eggs, or smash white beans into the avocado for a vegan option. Top with crumbled cheese, chopped nuts, seeds, baby greens, or cherry tomatoes."
-        ]
+          "For a protein boost, add one or two eggs, or smash white beans into the avocado for a vegan option. Top with crumbled cheese, chopped nuts, seeds, baby greens, or cherry tomatoes.",
+        ],
       },
       {
-        "name": "Broccoli and cheese egg bake",
-        "description": [
+        name: "Broccoli and cheese egg bake",
+        description: [
           "Eggs are an excellent source of protein, as well as several vitamins and minerals that are important for health.",
           "Make this 12-serving egg bake in advance, and enjoy nutritious leftovers all week long for hassle-free mornings.",
-          "It’s a reader favorite on my recipe blog and highly customizable. Feel free to add sliced bell peppers, chopped spinach, or mushrooms, and sub any type of cheese or milk you have on hand."
-        ]
-      }
-    ]
+          "It’s a reader favorite on my recipe blog and highly customizable. Feel free to add sliced bell peppers, chopped spinach, or mushrooms, and sub any type of cheese or milk you have on hand.",
+        ],
+      },
+    ],
   },
   {
-    "id": 1,
-    "data": [
+    id: 1,
+    data: [
       {
-        "name": "Italian pasta salad",
-        "description": [
+        name: "Italian pasta salad",
+        description: [
           "Pasta salad can be a balanced, nutritious meal. It’s often made with cooked pasta, non-starchy vegetables, and meat, cheese, or beans.",
           "Plus, pasta salad is served cold and keeps well in the fridge and lunch boxes.",
-          "Check out this Italian pasta salad for a healthy, affordable option. Add diced chicken, mozzarella cheese, or white beans for some protein, and use 100% whole wheat pasta for extra fiber."
-        ]
+          "Check out this Italian pasta salad for a healthy, affordable option. Add diced chicken, mozzarella cheese, or white beans for some protein, and use 100% whole wheat pasta for extra fiber.",
+        ],
       },
       {
-        "name": "Slow cooker lentil soup",
-        "description": [
+        name: "Slow cooker lentil soup",
+        description: [
           "“Dump and go” slow cooker meals are an easy option for lunches. Make them on the weekend to eat for lunch during the week, or throw together the ingredients in the morning to have a hot meal by lunchtime.",
           "This crockpot lentil soup is loaded with veggies and uses pantry spices and ingredients.",
-          "What’s more, lentils are a source of plant-based protein and fiber, which will help keep you feeling fuller for longer."
-        ]
+          "What’s more, lentils are a source of plant-based protein and fiber, which will help keep you feeling fuller for longer.",
+        ],
       },
       {
-        "name": "Peanut butter and banana roll-ups",
-        "description": [
+        name: "Peanut butter and banana roll-ups",
+        description: [
           "Peanut butter and banana is a winning culinary combo, and these roll-ups are great for kids.",
           "Bananas are also one of the best dietary sources of potassium, a mineral that contributes to healthy blood pressure",
-          "Slice it into bite-sized pieces. For a peanut-free option, use sunflower seed butter. If you want a little more sweetness, add a drizzle of honey on top of the peanut butter before rolling the tortilla."
-        ]
-      }
-    ]
+          "Slice it into bite-sized pieces. For a peanut-free option, use sunflower seed butter. If you want a little more sweetness, add a drizzle of honey on top of the peanut butter before rolling the tortilla.",
+        ],
+      },
+    ],
   },
   {
-    "id": 2,
-    "data": [
+    id: 2,
+    data: [
       {
-        "name": "Fridge/freezer stir-fry",
-        "description": [
+        name: "Fridge/freezer stir-fry",
+        description: [
           "Making a stir-fry with ingredients you already have is an easy way to put a healthy meal on the table fast.",
           "For the sauce, whisk 1/4 cup (60 mL) of vegetable broth, 1/4 cup (60 mL) of low sodium soy sauce, 1 tablespoon (15 mL) of maple syrup or honey, 2 cloves of minced garlic, and 1 tablespoon of cornstarch. Pour the mixture into the skillet, and cook it until it thickens.",
-          "This should yield approximately four servings. Serve it with brown rice or whole wheat noodles if desired."
-        ]
+          "This should yield approximately four servings. Serve it with brown rice or whole wheat noodles if desired.",
+        ],
       },
       {
-        "name": "Caprese chicken breasts",
-        "description": [
+        name: "Caprese chicken breasts",
+        description: [
           "For a delicious meal that’s on the table in 30 minutes, try chicken breasts made with caprese salad ingredients — tomatoes, mozzarella, and basil.",
           "This recipe includes instructions for making them in a single skillet. Make some pasta while they cook — or better yet, ahead of time — and you’ll have a balanced meal in no time.",
-          "The chicken provides filling protein. Plus, tomatoes are a source of lycopene, an antioxidant compound that boosts heart health."
-        ]
+          "The chicken provides filling protein. Plus, tomatoes are a source of lycopene, an antioxidant compound that boosts heart health.",
+        ],
       },
       {
-        "name": "Sheet pan pork chops and sweet potatoes",
-        "description": [
+        name: "Sheet pan pork chops and sweet potatoes",
+        description: [
           "Sheet pan meals are the epitome of hassle-free cooking. Plus, they make cleanup a breeze.",
           "This healthy sheet pan meal features pork chops, sweet potatoes, onions, apples, and pantry spices for a wholesome and balanced meal. The leftovers make a great lunch the next day, too.",
-          "Pork contains an abundance of nutrients, including selenium, an essential mineral that’s necessary for healthy reproduction and thyroid function ."
-        ]
-      }
-    ]
-  }
-]
+          "Pork contains an abundance of nutrients, including selenium, an essential mineral that’s necessary for healthy reproduction and thyroid function .",
+        ],
+      },
+    ],
+  },
+];
 
-
-defineProps({
-  tabs: Object as PropType<Tabs>,
-});
-
-const test: Ref<string> = ref("test");
+const tabs = defineProps<Tabs>();
 </script>
 <style scoped>
 .wrap-tab {
